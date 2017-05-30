@@ -1,4 +1,4 @@
-import {observable, computed} from "mobx";
+import {observable, computed, action} from "mobx";
 
 export default new class RegisterStore {
   @observable lastname = '';
@@ -11,4 +11,5 @@ export default new class RegisterStore {
   @computed get isFullfilled() {
     return this.lastname && this.firstname && this.email && this.emailConfirmation && this.password && this.passwordConfirmation;
   }
+
 }
