@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../RZik-client-no-decorators/.idea/RZik-client.iml" filepath="$PROJECT_DIR$/../RZik-client-no-decorators/.idea/RZik-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/RZik-client.iml" filepath="$PROJECT_DIR$/.idea/RZik-client.iml" />
     </modules>
   </component>
 </project>
