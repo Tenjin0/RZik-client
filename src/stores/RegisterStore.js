@@ -1,6 +1,6 @@
 import {observable, computed} from "mobx";
 
-export default new class RegisterStore {
+class RegisterStore {
   @observable lastname = '';
   @observable firstname = '';
   @observable email = '';
@@ -13,3 +13,8 @@ export default new class RegisterStore {
   }
 
 }
+
+const registerStore = new RegisterStore();
+
+export default registerStore;
+export { RegisterStore };

@@ -1,5 +1,5 @@
 import {apiUserUrl} from '../services/api'
-import {RegisterStore} from '../stores/RegisterStore'
+import RegisterStore from '../stores/RegisterStore'
 
 export function createUser() {
   return fetch(apiUserUrl('new'), {
