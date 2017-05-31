@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
 import {observer} from "mobx-react";
+import { createUser } from "../../actions/user";
 
 @observer
 export default class Registration extends Component {
 
   register() {
     if (this.props.store.isFullfilled) {
-      alert('Inscription effectué');
+      if(createUser()) {
+        alert('Inscription effectué');
+      }else {
+        alert('Error');
+      }
     } else {
       alert('Tous les champs sont obligatoires');
     }
