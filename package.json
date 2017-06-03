@@ -1,21 +1,57 @@
 {
-  "name": "RZik-client",
-  "version": "0.1.0",
-  "private": true,
+  "name": "mobx-example",
+  "version": "1.0.0",
+  "description": "Example for MobX + React. Includes hot code reloading in development mode and minification in production mode.  Also includes a demonstration of how to hook up a CMS API and do database calls and loading states.",
+  "scripts": {
+    "dev": "NODE_ENV=development node server.js",
+    "dash": " NODE_ENV=development webpack-dashboard -c cyan -- node server.js",
+    "start": "NODE_ENV=production webpack -p; NODE_ENV=production node server.js"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react",
+      "stage-1"
+    ],
+    "plugins": [
+      "transform-decorators-legacy",
+      "transform-class-properties"
+    ]
+  },
   "devDependencies": {
-    "custom-react-scripts": "0.0.23"
+    "autoprefixer": "^7.1.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "eslint-plugin-react": "^7.0.1",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "html-webpack-plugin": "^2.28.0",
+    "react-hot-loader": "3.0.0-beta.2",
+    "react-router": "^4.1.1",
+    "svg-sprite-loader": "^3.0.5",
+    "webpack": "^2.6.1",
+    "webpack-dashboard": "^0.4.0",
+    "webpack-dev-server": "^2.4.5",
+    "webpack-hot-middleware": "^2.18.0",
+    "webpack-merge": "^4.1.0"
   },
   "dependencies": {
-    "js-cookie": "^2.1.4",
-    "mobx": "^3.1.10",
+    "cosmicjs": "^2.39.91",
+    "eslint": "^3.19.0",
+    "express": "^4.15.3",
+    "mobx": "^3.1.11",
     "mobx-react": "^4.2.1",
+    "mobx-react-devtools": "^4.2.13",
+    "pug": "^2.0.0-rc.1",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "react-bootstrap": "^0.31.0",
+    "react-dom": "^15.5.4",
+    "shorti": "^1.2.6",
+    "slug": "^0.9.1"
   }
 }
