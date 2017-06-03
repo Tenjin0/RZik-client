@@ -10,6 +10,7 @@ import Home    from './Home.jsx';
 import MainLayout    from './MainLayout.jsx';
 import AuthLayout    from './AuthLayout.jsx';
 import NotFound    from './NotFound.jsx';
+
 // if (process.env.NODE_ENV !== 'production') {
 //     // Any configurations are optional
 //   configureDevtool({
@@ -35,11 +36,10 @@ export default class App extends Component {
         return (
             <BrowserRouter>
                 <div>
-                        {/* both /roster and /roster/:number begin with /roster */}
-                        <MainLayout exact path='/' component={Home}/>
-                        <MainLayout path='/upload' component={UploadTrack}/>
-                        <AuthLayout path="/login" component={Login} />
-                        <AuthLayout path="/register" component={Register} />
+                    <MainLayout exact path='/' component={Home}/>
+                    <MainLayout path='/upload' component={UploadTrack}/>
+                    <AuthLayout path="/login" component={Login} />
+                    <AuthLayout path="/register" component={Register} />
 
                     <DevTool />
                 </div>
