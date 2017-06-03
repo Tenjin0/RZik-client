@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "Example for MobX + React. Includes hot code reloading in development mode and minification in production mode.  Also includes a demonstration of how to hook up a CMS API and do database calls and loading states.",
   "scripts": {
-    "dev": "NODE_ENV=development node server.js",
-    "dash": " NODE_ENV=development webpack-dashboard -c cyan -- node server.js",
-    "start": "NODE_ENV=production webpack -p; NODE_ENV=production node server.js"
+    "start": "node server.js",
+    "dash": " NODE_ENV=development webpack-dashboard -c cyan -- node server.js"
   },
   "babel": {
     "presets": [

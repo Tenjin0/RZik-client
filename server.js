@@ -31,7 +31,9 @@ app.use(webpackDevMiddleware(compiler, {
     historyApiFallback: true
 }));
 
-app.use(webpackHotMiddleware(compiler));
+app.use(require("webpack-hot-middleware")(compiler, {
+    log: console.log, path: '/__webpack_hmr', heartbeat: 10 * 1000,
+}));
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './client/src/index.html'));
