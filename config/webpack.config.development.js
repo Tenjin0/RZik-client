@@ -13,7 +13,7 @@ const GLOBALS = {
 module.exports = {
   // the entry file for the bundle
   
-    entry: ['webpack-hot-middleware/client', "react-hot-loader/patch", 'index.js'],
+    entry: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', 'index.js'],
     output: {
         filename: 'js/[name].js',
         path: path.resolve(__dirname, '../client/build'),
@@ -54,7 +54,8 @@ module.exports = {
         new webpack.ProvidePlugin({
             'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch', // fetch API
             'jQuery': 'jquery',
-            '$': "jquery"
+            '$': "jquery",
+            'React': 'react',
         }),
         new webpack.DefinePlugin(GLOBALS),
         new webpack.HotModuleReplacementPlugin(),

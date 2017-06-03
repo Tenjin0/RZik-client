@@ -3,6 +3,10 @@ import DevTool, { configureDevtool } from 'mobx-react-devtools';
 import {autorun, observable} from 'mobx';
 import userStore from '../stores/userStore';
 import trackStore from '../stores/trackStore';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { browserHistory, Router, Route,  hashHistory, IndexRoute } from 'react-router';
 
 if (process.env.NODE_ENV !== 'production') {
     // Any configurations are optional
@@ -17,6 +21,7 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
+// console.warn('toto');
 export default class App extends Component {
     constructor() {
         super();
@@ -26,7 +31,7 @@ export default class App extends Component {
 
         return (
             <div>
-                { process.env.NODE_ENV !== 'production' ? <DevTool /> : "" }
+            Hello
             </div>
         );
     }
