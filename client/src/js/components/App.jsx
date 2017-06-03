@@ -31,7 +31,7 @@ export default class App extends Component {
 
         return (
             <div>
-            Hello
+            Hell
             </div>
         );
     }

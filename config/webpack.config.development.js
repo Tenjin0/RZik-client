@@ -13,7 +13,7 @@ const GLOBALS = {
 module.exports = {
   // the entry file for the bundle
   
-    entry: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', 'index.js'],
+    entry: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', 'react-hot-loader/patch', 'index.js'],
     output: {
         filename: 'js/[name].js',
         path: path.resolve(__dirname, '../client/build'),

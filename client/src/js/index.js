@@ -5,14 +5,15 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { browserHistory, Router, Route,  hashHistory, IndexRoute } from 'react-router';
+console.warn('toto')
 
-
-injectTapEventPlugin();
 
 // TODO ROUTER, MATERIAL-UI
 const render = Component => {
   ReactDOM.render(
-        <App />,
+    <AppContainer>
+        <App />
+        </AppContainer>,
     document.getElementById('root')
   )
 }
@@ -20,5 +21,5 @@ const render = Component => {
 render(App)
 
 if (module.hot) {
-  module.hot.accept('./components/App', () => { render(App) })
+  module.hot.accept()
 }
