@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom'
 // import { AppContainer } from 'react-hot-loader'
-// import injectTapEventPlugin from 'react-tap-event-plugin';
+import {grey900} from 'material-ui/styles/colors';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -10,12 +10,22 @@ import { Provider } from "mobx-react";
 
 import App from './components/App.jsx'
 import * as stores from './stores';
-console.warn(stores)
-console.warn(...stores)
+
+import './components/tap_events'
+import '../scss/app.scss'
+
+const muiTheme = getMuiTheme({
+  palette: {
+    color: grey900,
+  },
+  appBar: {
+    height: 60,
+  },
+});
 // TODO ROUTER, MATERIAL-UI
 const render = () => {
   ReactDOM.render(
-          <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+          <MuiThemeProvider muiTheme={muiTheme}>
             <Provider store={stores}>
                   <App />
               </Provider>

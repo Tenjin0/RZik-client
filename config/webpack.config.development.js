@@ -17,12 +17,12 @@ module.exports = {
     entry: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', 'react-hot-loader/patch', 'index.js'],
     output: {
         filename: 'js/[name].js',
-        path: path.resolve(__dirname, '../client/build'),
+        path: path.resolve(__dirname, '../build'),
         publicPath: '/'
     },
     resolve: {
         modules: [
-            path.join(__dirname, '../client/src/js'),
+            path.join(__dirname, '../src/js'),
             // path.join(__dirname, '../src/assets/scripts'),
             'node_modules'
         ],
@@ -49,16 +49,19 @@ module.exports = {
                 }
             },
             {
-                test: /\.scss|css$/i,
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: [
-                        "css-loader",
-                        "postcss-loader",
-                        "resolve-url-loader",
-                        "sass-loader?sourceMap"
-                    ]
-                })
+                test: /\.scss$/,
+                exclude: /node_modules/,
+                use: [
+                    'style-loader',
+                    // Using source maps breaks urls in the CSS loader
+                    // https://github.com/webpack/css-loader/issues/232
+                    // This comment solves it, but breaks testing from a local network
+                    // https://github.com/webpack/css-loader/issues/232#issuecomment-240449998
+                    // 'css-loader?sourceMap',
+                    'css-loader',
+                    // 'postcss-loader',
+                    'sass-loader?sourceMap',
+                ]
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
@@ -99,6 +102,7 @@ module.exports = {
         new webpack.DefinePlugin(GLOBALS),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
+        
         new webpack.LoaderOptionsPlugin({
             debug: true,   
             options: {
