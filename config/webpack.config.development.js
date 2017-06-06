@@ -51,35 +51,42 @@ module.exports = {
             {
                 test: /\.scss$/,
                 exclude: /node_modules/,
-                use: [
-                    'style-loader',
-                    // Using source maps breaks urls in the CSS loader
-                    // https://github.com/webpack/css-loader/issues/232
-                    // This comment solves it, but breaks testing from a local network
-                    // https://github.com/webpack/css-loader/issues/232#issuecomment-240449998
-                    // 'css-loader?sourceMap',
-                    'css-loader',
-                    // 'postcss-loader',
-                    'sass-loader?sourceMap',
-                ]
+                use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader','sass-loader?sourceMap'] })
+
+                // use: [
+                //     'style-loader',
+                //     // Using source maps breaks urls in the CSS loader
+                //     // https://github.com/webpack/css-loader/issues/232
+                //     // This comment solves it, but breaks testing from a local network
+                //     // https://github.com/webpack/css-loader/issues/232#issuecomment-240449998
+                //     // 'css-loader?sourceMap',
+                //     'css-loader',
+                //     // 'postcss-loader',
+                //     'sass-loader?sourceMap',
+                // ]
             },
+            { test: /(\.css$)/, loaders: ['style-loader', 'css-loader'] },
+
             {
-                test: /\.(jpe?g|png|gif|svg)$/i,
-                use: [
-                    "file-loader?hash=sha512&digest=hex&name=[hash].[ext]",
-                    {
-                        loader: "image-webpack-loader",
-                        options: {
-                            progressive: true,
-                            optimizationLevel: 7,
-                            interlaced: false,
-                            pngquant: {
-                                quality: "65-90",
-                                speed: 4
-                            }
-                        }
-                    }
-                ]
+            test: /\.(jpe?g|gif|png|eot|svg|woff2|ttf)$/,
+                loaders: ['file-loader?context=src/images&name=images/[path][name].[ext]', {
+          loader: 'image-webpack-loader',
+          query: {
+            mozjpeg: {
+              progressive: true,
+            },
+            gifsicle: {
+              interlaced: false,
+            },
+            optipng: {
+              optimizationLevel: 4,
+            },
+            pngquant: {
+              quality: '75-90',
+              speed: 3,
+            },
+          },
+        }],
             },
             {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -94,15 +101,18 @@ module.exports = {
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.ProvidePlugin({
-            'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch', // fetch API
-            'jQuery': 'jquery',
+            // 'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch', // fetch API
             '$': "jquery",
             'React': 'react',
+            'axios': 'axios',
+            // 'fs' : 'fs',
+            "musicmetadata" : 'musicmetadata'
         }),
         new webpack.DefinePlugin(GLOBALS),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
-        
+        new ExtractTextPlugin("app.css"),
+
         new webpack.LoaderOptionsPlugin({
             debug: true,   
             options: {

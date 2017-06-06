@@ -5,13 +5,14 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import { Router, IndexRoute } from 'react-router';
 import Login from './Login';
 import Register from './Register';
-import MyUploads from './Uploads/MyUploads';
-import Upload from './Uploads/Upload';
+import MyUploads from './uploads/MyUploads';
+import Upload from './uploads/Upload';
 import Home    from './Home';
-import MainLayout    from './MainLayout';
-import AuthLayout    from './AuthLayout';
+import MainLayout    from './layouts/MainLayout';
+import AuthLayout    from './layouts/AuthLayout';
 import NotFound    from './NotFound';
-
+require('font-awesome/css/font-awesome.css');
+// console.warn(musicmetadata)
 if (process.env.NODE_ENV !== 'production') {
     // Any configurations are optional
   configureDevtool({
