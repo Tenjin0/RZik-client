@@ -1,13 +1,18 @@
 let webpack = require('webpack');
-let NODE_ENV = process.env.NODE_ENV;
 let port = process.env.PORT || '8080';
 let path = require('path');
-let ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+let NODE_ENV = process.env.NODE_ENV;
+const API_PORT = process.env.API_PORT || '3000'
+const API_HOST = process.env.API_HOST || 'localhost'
+let API_URL = `http://${API_HOST}:${API_PORT}`
+
+let ExtractTextPlugin = require("extract-text-webpack-plugin");
 const GLOBALS = {
   'process.env': {
     'NODE_ENV': JSON.stringify(NODE_ENV)
   },
+  'API_URL' : JSON.stringify(API_URL),
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'true'))
 };
 
@@ -70,23 +75,23 @@ module.exports = {
             {
             test: /\.(jpe?g|gif|png|eot|svg|woff2|ttf)$/,
                 loaders: ['file-loader?context=src/images&name=images/[path][name].[ext]', {
-          loader: 'image-webpack-loader',
-          query: {
-            mozjpeg: {
-              progressive: true,
-            },
-            gifsicle: {
-              interlaced: false,
-            },
-            optipng: {
-              optimizationLevel: 4,
-            },
-            pngquant: {
-              quality: '75-90',
-              speed: 3,
-            },
-          },
-        }],
+                    loader: 'image-webpack-loader',
+                    query: {
+                        mozjpeg: {
+                            progressive: true,
+                        },
+                        gifsicle: {
+                            interlaced: false,
+                        },
+                        optipng: {
+                            optimizationLevel: 4,
+                        },
+                        pngquant: {
+                            quality: '75-90',
+                            speed: 3,
+                        }
+                    }
+                }],
             },
             {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -105,8 +110,6 @@ module.exports = {
             '$': "jquery",
             'React': 'react',
             'axios': 'axios',
-            // 'fs' : 'fs',
-            "musicmetadata" : 'musicmetadata'
         }),
         new webpack.DefinePlugin(GLOBALS),
         new webpack.HotModuleReplacementPlugin(),

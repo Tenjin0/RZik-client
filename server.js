@@ -15,8 +15,8 @@ const compiler = webpack(config);
 compiler.apply(new DashboardPlugin());
 
 const host = process.env.HOST || 'localhost';
-const port = process.env.PORT || 3000;
-const API_PORT = port + 1;
+const port = process.env.API_PORT || 3000;
+const API_PORT = Number.parseInt(process.env.API_PORT) + 1;
 
 function log() {
     arguments[0] = '\nWebpack: ' + arguments[0];
@@ -32,7 +32,7 @@ app.use(webpackDevMiddleware(compiler, {
     historyApiFallback: true,
     proxy: {
       '/api/*': {
-        target: `http://localhost:${API_PORT}`
+        target: `http://${host}:${API_PORT}`
       }
     }
 }));

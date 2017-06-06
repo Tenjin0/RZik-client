@@ -12,7 +12,7 @@ import MainLayout    from './layouts/MainLayout';
 import AuthLayout    from './layouts/AuthLayout';
 import NotFound    from './NotFound';
 require('font-awesome/css/font-awesome.css');
-// console.warn(musicmetadata)
+console.warn(API_URL)
 if (process.env.NODE_ENV !== 'production') {
     // Any configurations are optional
   configureDevtool({
