@@ -9,8 +9,8 @@ import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import { Provider } from "mobx-react";
 
 import App from './components/App.jsx'
+import { genderStore } from './stores';
 import * as stores from './stores';
-
 import './components/tap_events'
 import '../scss/app.scss'
 
@@ -26,7 +26,7 @@ const muiTheme = getMuiTheme({
 const render = () => {
   ReactDOM.render(
           <MuiThemeProvider muiTheme={muiTheme}>
-            <Provider store={stores}>
+            <Provider { ...stores }>
                   <App />
               </Provider>
           </MuiThemeProvider>

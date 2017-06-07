@@ -1,9 +1,23 @@
 body {
     margin: 0;
 }
-input#audiofile {
-    display : none;
+.DefaultLayoutComponent {
+    margin : 1em 1em 0em;
 }
-.field-line {
-    display: block;
+
+form {
+    input[type="file"] {
+        display : none;
+    }
+    .field-line {
+        display: block;
+    }
+    .margin-top {
+        margin-top: 1em;
+    }
+
+    #image_cover {
+        width: 90%;
+        padding: 1em;
+    }
 }

@@ -15,7 +15,7 @@ const compiler = webpack(config);
 compiler.apply(new DashboardPlugin());
 
 const host = process.env.HOST || 'localhost';
-const port = process.env.API_PORT || 3000;
+const port = parseInt(process.env.API_PORT) -1 || 3000;
 const API_PORT = Number.parseInt(process.env.API_PORT) + 1;
 
 function log() {

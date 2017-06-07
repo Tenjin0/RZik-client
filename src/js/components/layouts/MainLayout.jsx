@@ -8,7 +8,9 @@ const MainLayout = ({component: Component, ...rest}) => {
     <Route {...rest} render={matchProps => (
         <div className="DefaultLayout">
             <AppBar style={{backgroundColor: grey900}} title="RZik" />
-            <Component {...matchProps} />
+            <div className="DefaultLayoutComponent">
+              <Component {...matchProps} />
+            </div>
             <div className="Footer">Footer Main</div>
         </div>
     )} />

@@ -12,7 +12,8 @@ import MainLayout    from './layouts/MainLayout';
 import AuthLayout    from './layouts/AuthLayout';
 import NotFound    from './NotFound';
 require('font-awesome/css/font-awesome.css');
-console.warn(API_URL)
+require('flexboxgrid/css/flexboxgrid.css');
+
 if (process.env.NODE_ENV !== 'production') {
     // Any configurations are optional
   configureDevtool({
@@ -37,10 +38,10 @@ export default class App extends Component {
                     <Switch>
                         <MainLayout exact path='/' component={Home}/>
                         <MainLayout exact path='/uploads' component={MyUploads}/>
-                        <MainLayout path='/uploads/new' component={Upload}/>
-                        <MainLayout path='/uploads/:number' component={Upload}/>
-                        <AuthLayout path="/login" component={Login} />
-                        <AuthLayout path="/register" component={Register} />
+                        <MainLayout exact path='/uploads/new' component={Upload}/>
+                        <MainLayout exact path='/uploads/:number' component={Upload}/>
+                        <AuthLayout exact path="/login" component={Login} />
+                        <AuthLayout exact path="/register" component={Register} />
                         <Route component={NotFound} />
                     </Switch>
                     <DevTool />

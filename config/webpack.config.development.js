@@ -3,7 +3,7 @@ let port = process.env.PORT || '8080';
 let path = require('path');
 
 let NODE_ENV = process.env.NODE_ENV;
-const API_PORT = process.env.API_PORT || '3000'
+const API_PORT = process.env.API_PORT || '3001'
 const API_HOST = process.env.API_HOST || 'localhost'
 let API_URL = `http://${API_HOST}:${API_PORT}`
 
@@ -70,7 +70,7 @@ module.exports = {
                 //     'sass-loader?sourceMap',
                 // ]
             },
-            { test: /(\.css$)/, loaders: ['style-loader', 'css-loader'] },
+            { test: /(\.css$)/, loaders: ['style-loader', 'css-loader'], include: [/flexboxgrid/, /font-awesome/]},
 
             {
             test: /\.(jpe?g|gif|png|eot|svg|woff2|ttf)$/,
