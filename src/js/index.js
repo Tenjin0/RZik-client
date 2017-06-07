@@ -19,7 +19,7 @@ const muiTheme = getMuiTheme({
     color: grey900,
   },
   appBar: {
-    height: 60,
+    height: 64,
   },
 });
 // TODO ROUTER, MATERIAL-UI

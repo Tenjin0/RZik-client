@@ -11,18 +11,22 @@ import CustomInputFile from './CustomInputFile'
 import Checkbox from 'material-ui/Checkbox';
 import { observer, inject } from 'mobx-react';
 
-@inject('genderStore', 'uploadFormStore') @observer
+@inject('uploadFormStore') @observer
 class Upload extends Component {
     
     constructor(props, context) {
         super(props, context);
-
+        this.props.uploadFormStore.setIsNew((this.props.match.path === '/uploads/new'))
+        this.props.uploadFormStore.setIsFileLoaded(false)
+        this.state = {
+            isFileloaded : true
+        }
     }
 
     onChangeAudioFile(e) {
         var url = $(this.target).val();
         // var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
-        var audiodata = document.querySelector('input[type="file"]#audiofile').files[0];
+        var audiodata = document.querySelector('input[type="file"]#audio_file').files[0];
         var data = new FormData();
         data.append('audio_file',audiodata)
         axios({
@@ -30,6 +34,9 @@ class Upload extends Component {
             url: "http://localhost:3001/api/audiofiles/metadata",
             data: data
         }).then(res => {
+            this.props.uploadFormStore.setIsFileLoaded(true);
+            this.state.isFileloaded = true;
+            this.setState(this.state);
             // const posts = res.data.data.children.map(obj => obj.data);
             // this.setState({ posts });
         }).catch(error => {
@@ -70,16 +77,22 @@ class Upload extends Component {
         return (
             <form id="audiofileform" name="audiofileform" onSubmit={this.handleSubmit.bind(this)}>      
                 <Row>
-                    <Col xs={12} md={4} >
+                    <Col xs={12} sm={6} md={4} >
                         <CustomInputFile accept="audio/*" name="audio_file" onchange={ this.onChangeAudioFile.bind(this)}>
                             <FileCloudUpload />
                         </CustomInputFile>
+                        {
+                            this.state.isFileloaded ?      
+                        <div>
                         <CustomInputFile accept="image/*" className="margin-top" name="cover" onchange={ this.onChangeCoverFile.bind(this)}>
                             <AddPhoto />
                         </CustomInputFile>
-                        <img id="image_cover"></img>
+                        <div ref="image_cover" id="image_cover"></div></div> :
+                         ""
+                        }
+                  
                     </Col>
-                    <Col xs={12} md={4} >
+                    <Col xs={12} sm={6} md={4} >
                         <div>
                             <TextField
                                 id="title"
@@ -146,7 +159,7 @@ class Upload extends Component {
                         </div>
                         
                     </Col>
-                    <Col xs={12} md={4} >
+                    <Col xs={12} sm={12} md={4} >
                         <div>
                             <Checkbox
                                 label="Contenu explicite"
@@ -164,10 +177,6 @@ class Upload extends Component {
                         </div>
                     </Col>
                 </Row>
-               
-                <div>
-                    
-                </div>
             </form>
         );
     }

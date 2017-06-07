@@ -39,7 +39,7 @@ export default class App extends Component {
                         <MainLayout exact path='/' component={Home}/>
                         <MainLayout exact path='/uploads' component={MyUploads}/>
                         <MainLayout exact path='/uploads/new' component={Upload}/>
-                        <MainLayout exact path='/uploads/:number' component={Upload}/>
+                        <MainLayout exact path='/uploads/:number([0-9]+)' component={Upload}/>
                         <AuthLayout exact path="/login" component={Login} />
                         <AuthLayout exact path="/register" component={Register} />
                         <Route component={NotFound} />

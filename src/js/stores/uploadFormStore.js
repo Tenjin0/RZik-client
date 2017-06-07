@@ -2,29 +2,24 @@ import { observable, action } from 'mobx';
 
 class UploadFormStore {
 
-  @observable genders;
-  @observable selectedGenders;
+  @observable isNew;
+  @observable isFileLoaded;
 
-  constructor(genders = []) {
-    this.genders = genders;
+  constructor() {
+      this.isNew = true
+      this.isFileLoaded = false
   }
 
-  @action setGenders = (genders) => {
-    this.genders = genders;
+  @action setIsNew = (isNew) => {
+    this.isNew = isNew;
   }
 
-  @action setSelectedGenders = (genders) => {
-    if (genders.length === 0) genders = null;
-
-    this.selectedGenders = genders;
-  }
-
-  @action emptySelectedGenders = () => {
-    this.selectedGenders = [];  
+  @action setIsFileLoaded = (isFileLoaded) => {
+      this.isFileLoaded = isFileLoaded
   }
 }
 
 const uploadFormStore = new UploadFormStore();
 
-export default UploadFormStore;
-export { uploadFormStore };
+export default uploadFormStore;
+export { UploadFormStore };
