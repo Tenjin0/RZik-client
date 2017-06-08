@@ -25,27 +25,7 @@ class MainLayout extends Component {
   cons(matchProps) {
     console.log(matchProps);
 
-    return (
-      <div className="DefaultLayout">
-        <AppBar style={{backgroundColor: grey900}} title="RZik"
-                onLeftIconButtonTouchTap={this._handleClick.bind(this)}
-        />
-        <Drawer
-          className="MY_LeftNav"
-          docked={true}
-          width={200}
-          open={this.state.open}
-          containerStyle={navStyle}
-          onRequestChange={(open) => this.setState({open})}
-        >
-          <MenuItem onTouchTap={this.handleClose}>Menu Item</MenuItem>
-          <MenuItem onTouchTap={this.handleClose}>Menu Item 2</MenuItem>
-        </Drawer>
-        <div style={contentStyle} className="DefaultLayoutComponent">
-          <Component {...matchProps} />
-        </div>
-      </div>
-    )
+
   }
 
   render() {
@@ -68,7 +48,27 @@ class MainLayout extends Component {
       { route: 'components', text: 'Components' },
     ];
     return (
-      <Route {...rest} render={this.cons(matchProps)} />
+      <Route {...rest} render={matchProps => (
+        <div className="DefaultLayout">
+          <AppBar style={{backgroundColor: grey900}} title="RZik"
+                  onLeftIconButtonTouchTap={this._handleClick.bind(this)}
+          />
+          <Drawer
+            className="MY_LeftNav"
+            docked={true}
+            width={200}
+            open={this.state.open}
+            containerStyle={navStyle}
+            onRequestChange={(open) => this.setState({open})}
+          >
+            <MenuItem onTouchTap={this.handleClose}>Menu Item</MenuItem>
+            <MenuItem onTouchTap={this.handleClose}>Menu Item 2</MenuItem>
+          </Drawer>
+          <div style={contentStyle} className="DefaultLayoutComponent">
+            <Component {...matchProps} />
+          </div>
+        </div>
+      )} />
     )
   }
 
