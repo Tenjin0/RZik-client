@@ -26,11 +26,15 @@ class MainLayout extends Component {
     var {component: Component, ...rest} = this.props;
     const navStyle = {
       top: 64,
-      height: (window.innerHeight - 64)
+      height: (window.innerHeight - 64),
+      position: 'absolute'
     };
     const contentStyle = {  transition: 'margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)' };
     if (this.state.open) {
       contentStyle.marginLeft = 256;
+      contentStyle.width = '79%';
+    } else {
+      contentStyle.width = '97%';
     }
     var menuItems = [
       { route: 'get-started', text: 'Get Started' },
@@ -57,7 +61,6 @@ class MainLayout extends Component {
                 <div style={contentStyle} className="DefaultLayoutComponent">
                   <Component {...matchProps} />
                 </div>
-                <div className="Footer">Footer Main</div>
           </div>
       )} />
     )
@@ -71,7 +74,7 @@ const resizeLeftNav = () => {
     leftNav.style.height = (window.innerHeight - 64) + 'px';
   }
 };
-window.addEventListener('resize', resizeLeftNav, false);
+// window.addEventListener('resize', resizeLeftNav, false);
 window.addEventListener('scroll', () => {
   console.log(window.pageYOffset)
    const leftNav = document.getElementsByClassName('MY_LeftNav')[0];
