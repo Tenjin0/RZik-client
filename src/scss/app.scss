@@ -16,8 +16,91 @@ form {
         margin-top: 1em;
     }
 
-    #image_cover {
-        width: 90%;
-        padding: 1em;
+    .image_cover {
+            position: absolute;
+            top: 0;
+            width: 80%;
+            height: 0;
+            background-size: cover !important;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            padding: 40.805% 0% 30.805% 0%;
+            // max-height: 90%;
+            // background-size: contain;
+            // width: 80%;
+    }
+    .image_cover.z-index {
+        z-index : 10
+    }
+    .show-image {
+        position: relative;
+        margin-top: 1em;
+        left: 30px;
+        .cover-delete {
+            background-color: transparent;
+            display: none;
+            position: absolute;
+            z-index: 3;
+            // width: 62px;
+            // height: 62px;
+            // margin-left: -31px;
+            margin-top: -31px;
+            // top: 50%;
+            // left: 50%;
+            color: #fff;
+            // border: 1px solid #a0a0a0;
+            // border-radius: 500px;
+            box-sizing: content-box;
+            outline: 0;
+            cursor: pointer;
+            -webkit-transition: all .3s cubic-bezier(0,0,0,2.41);
+            transition: all .3s cubic-bezier(0,0,0,2.41);
+            // position: relative;
+            left: 40%;
+            // z-index: 10;
+            width: 36px;
+            height: 46px;
+            border: 1px solid white;
+            border-radius: 500px;
+            background-color: transparent;
+            color: #fff;
+            transition: transform .3s cubic-bezier(0,0,0,2.41);
+            // visibility: hidden;
+            &:hover {
+                transform: scale(1.2);
+            }
+            &:focus {
+                outline: 0px
+            }
+        }
+    }
+    .show-image:hover {
+        .image_cover:not(.z-index) {
+            -webkit-filter: brightness(.3);
+            filter: brightness(.3);
+            -webkit-transition: .2s;
+            transition: .2s;
+        }
+        .cover-delete {
+            // visibility: visible;
+            display: block;
+        }
+    }
+
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus
+    input:-webkit-autofill, 
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+        border: 0px solid white;
+        -webkit-box-shadow: 0 0 0px 1000px white inset;
+        box-shadow: 0 0 0px 1000px white inset;
+        transition: background-color 5000s ease-in-out 0s;
     }
 }

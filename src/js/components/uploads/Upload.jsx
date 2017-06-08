@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import FileCloudUpload from 'material-ui/svg-icons/file/cloud-upload';
-import AddPhoto from 'material-ui/svg-icons/image/crop-original';
 import FontIcon from 'material-ui/FontIcon';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -10,6 +9,7 @@ import SelectGender from './SelectGender'
 import CustomInputFile from './CustomInputFile'
 import Checkbox from 'material-ui/Checkbox';
 import { observer, inject } from 'mobx-react';
+import Cover from './Cover';
 
 @inject('uploadFormStore') @observer
 class Upload extends Component {
@@ -44,17 +44,6 @@ class Upload extends Component {
         });
     }
 
-    onChangeCoverFile(e) {
-        var file = e.target.files[0];
-        var reader = new FileReader();
-  
-        reader.onload = function(event) {
-            document.getElementById('image_cover').src = event.target.result;
-        }
-
-        reader.readAsDataURL(file);
-    }
-
     handleSubmit(e) {
         e.preventDefault();
         // var audiodata = document.querySelector('input[type="file"]#audiofile').files[0];
@@ -83,11 +72,7 @@ class Upload extends Component {
                         </CustomInputFile>
                         {
                             this.state.isFileloaded ?      
-                        <div>
-                        <CustomInputFile accept="image/*" className="margin-top" name="cover" onchange={ this.onChangeCoverFile.bind(this)}>
-                            <AddPhoto />
-                        </CustomInputFile>
-                        <div ref="image_cover" id="image_cover"></div></div> :
+                        <Cover/> :
                          ""
                         }
                   

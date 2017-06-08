@@ -65,12 +65,21 @@ class MainLayout extends Component {
 
 }
 const resizeLeftNav = () => {
+  console.log(window.pageYOffset)
   const leftNav = document.getElementsByClassName('MY_LeftNav')[0];
   if (leftNav) {
     leftNav.style.height = (window.innerHeight - 64) + 'px';
   }
 };
 window.addEventListener('resize', resizeLeftNav, false);
+window.addEventListener('scroll', () => {
+  console.log(window.pageYOffset)
+   const leftNav = document.getElementsByClassName('MY_LeftNav')[0];
+  if (leftNav) {
+    console.log(leftNav.style.top, window.pageYOffset, leftNav.style.top - window.pageYOffset)
+    leftNav.style.top = (0) + 'px !important';
+  }
+}, false);
 // const MainLayout = ({component: Component, ...rest}) => {
 //     console.warn(Component, rest);
   
