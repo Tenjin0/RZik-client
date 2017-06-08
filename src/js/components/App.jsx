@@ -4,13 +4,15 @@ import {autorun, observable} from 'mobx';
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import { Router, IndexRoute } from 'react-router';
 import Login from './Login';
-import Register from './Register';
 import MyUploads from './uploads/MyUploads';
 import Upload from './uploads/Upload';
 import Home    from './Home';
 import MainLayout    from './layouts/MainLayout';
 import AuthLayout    from './layouts/AuthLayout';
 import NotFound    from './NotFound';
+
+import Registration from "./Registration/index";
+
 require('font-awesome/css/font-awesome.css');
 require('flexboxgrid/css/flexboxgrid.css');
 
@@ -41,8 +43,8 @@ export default class App extends Component {
                         <MainLayout exact path='/uploads/new' component={Upload}/>
                         <MainLayout exact path='/uploads/:number([0-9]+)' component={Upload}/>
                         <AuthLayout exact path="/login" component={Login} />
-                        <AuthLayout exact path="/register" component={Register} />
-                        <Route component={NotFound} />
+                        <AuthLayout exact path='/register' component={Registration}/>
+                      <Route component={NotFound} />
                     </Switch>
                     <DevTool />
                 </div>
