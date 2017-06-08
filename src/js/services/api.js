@@ -1,33 +1,14 @@
-import config from '../config.js';
-import Auth from "./auth.js";
+import {API_URL} from '../constants/authentification';
+import {USERS} from '../constants/endpoints';
 
-export default class Api {
+export function apiUrl() {
+  return `${API_URL}/${USERS}`
+}
 
-    constructor() {
-        this.xhr = new XMLHttpRequest();
-    }
+export function authUrl() {
+  return `${API_URL}/auth`
+}
 
-    send(method, url, data, callback) {
-
-        if (Auth.isUserAuthenticated()) {
-            url += '?token=' + Auth.getAuthenticatedToken();
-        }
-        this.xhr.open(method, config.url + url);
-        this.xhr.responseType = 'json';
-        this.xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-        var formData = null;
-        if(data) {
-            formData = "";
-            for (var key in data) {
-                formData += key + '=' +encodeURIComponent(data[key])  + "&";
-            }  
-        }
-
-        this.xhr.onload = function() {
-            callback(this.xhr.status, this.xhr.response);
-        }.bind(this);
-
-        this.xhr.send(formData);
-    }
- }
+export function apiUserUrl(param) {
+  return `${API_URL}/${USERS}`
+}
