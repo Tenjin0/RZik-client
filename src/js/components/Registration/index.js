@@ -19,7 +19,7 @@ export default class Registration extends Component {
 
       createUser().then(response => {
         alert('Inscription effectué');
-        console.log(response.token);
+        console.log('USER REGISTERED ', response);
       }).catch(err => {
         if(err.code = 102) {
           alert('Email déjà pris');

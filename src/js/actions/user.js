@@ -18,7 +18,7 @@ export function createUser() {
       email: registerStore.email,
       password: registerStore.password,
     }).then(response => {
-        resolve(response.json())
+        resolve(response);
       })
       .catch(error => {
         reject(error);
