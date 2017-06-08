@@ -16,3 +16,7 @@ export function apiUserUrl(param) {
 export function signupUrl() {
   return `${API_URL}/${ENDPOINTS.SIGNUP}`
 }
+
+export function playlistUrl() {
+  return `${FULL_API_URL}/${ENDPOINTS.PLAYLIST}`
+}
