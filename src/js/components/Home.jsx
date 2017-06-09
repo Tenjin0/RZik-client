@@ -10,6 +10,7 @@ class Register extends Component {
                 <li><Link to='/'>Home</Link></li>
                 <li><Link to='/register'>Register</Link></li>
                 <li><Link to='/login'>Login</Link></li>
+                <li><Link to='/language'>Language</Link></li>
             </ul>
             </div>
         );
