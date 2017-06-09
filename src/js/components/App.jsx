@@ -11,6 +11,7 @@ import MainLayout    from './layouts/MainLayout';
 import AuthLayout    from './layouts/AuthLayout';
 import NotFound    from './NotFound';
 import Registration from "./Registration/index";
+import { IntlProvider, addLocaleData } from 'react-intl';
 
 require('font-awesome/css/font-awesome.css');
 require('flexboxgrid/css/flexboxgrid.css');
