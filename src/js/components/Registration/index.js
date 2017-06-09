@@ -1,18 +1,34 @@
 import React, {Component} from 'react';
-import {observer} from "mobx-react";
-import {createUser} from "../../actions/user";
+import {observer, inject} from "mobx-react";
+import {createUserCb, createUser} from "../../actions/user";
 
-@observer
+@inject(['registerStore']) @observer
 export default class Registration extends Component {
 
   register(event) {
     event.preventDefault();
-    if (this.props.store.isFullfilled) {
-      if (createUser()) {
+
+    if (this.props.registerStore.isFullfilled) {
+/*      createUserCb(err, result => {
+        if (result) {
+          alert('Inscription effectué');
+        } else {
+          alert('Error');
+        }
+      });*/
+
+      createUser().then(response => {
         alert('Inscription effectué');
-      } else {
-        alert('Error');
-      }
+        console.log('USER REGISTERED ', response);
+      }).catch(err => {
+        if(err.code = 102) {
+          alert('Email déjà pris');
+        } else {
+          alert('Erreur interne');
+        }
+        console.log(err);
+      });
+
     } else {
       alert('Tous les champs sont obligatoires');
     }
@@ -20,19 +36,15 @@ export default class Registration extends Component {
 
   onChange(event) {
     let fieldName = event.target.name;
-    this.props.store[fieldName] = event.target.value;
+    this.props.registerStore[fieldName] = event.target.value;
   }
 
-  render() {
-    const {lastname, firstname, email, emailConfirmation, passwordConfirmation, password} = this.props.store;
 
+  render() {
+    const {email, emailConfirmation, passwordConfirmation, password} = this.props.registerStore;
     return (
       <div>
-        Registration pour {firstname} {lastname}
         <form onSubmit={this.register.bind(this)}>
-          <input name="firstname" type="text" value={firstname} onChange={this.onChange.bind(this)}
-                 placeholder="Prénom" required/>
-          <input name="lastname" type="text" value={lastname} onChange={this.onChange.bind(this)} placeholder="Nom" required/>
           <input name="email" type="email" value={email} onChange={this.onChange.bind(this)} placeholder="Email" required/>
           <input name="emailConfirmation" type="email" value={emailConfirmation} onChange={this.onChange.bind(this)}
                  placeholder="Email Confirmation" required/>

@@ -1,8 +1,8 @@
-import {API_URL} from '../constants/authentification';
-import {USERS} from '../constants/endpoints';
+import {} from '../constants/authentification';
+import * as ENDPOINTS from '../constants/endpoints';
 
 export function apiUrl() {
-  return `${API_URL}/${USERS}`
+  return `${API_URL}/${ENDPOINTS.USERS}`
 }
 
 export function authUrl() {
@@ -10,5 +10,9 @@ export function authUrl() {
 }
 
 export function apiUserUrl(param) {
-  return `${API_URL}/${USERS}`
+  return `${API_URL}/${ENDPOINTS.USERS}`
+}
+
+export function signupUrl() {
+  return `${API_URL}/${ENDPOINTS.SIGNUP}`
 }

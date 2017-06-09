@@ -3,9 +3,9 @@ let port = process.env.PORT || '8080';
 let path = require('path');
 
 let NODE_ENV = process.env.NODE_ENV;
-const API_PORT = process.env.API_PORT || '3001'
-const API_HOST = process.env.API_HOST || 'localhost'
-let API_URL = `http://${API_HOST}:${API_PORT}`
+const API_PORT = process.env.API_PORT || '3001';
+const API_HOST = process.env.API_HOST || 'localhost';
+let API_URL = `http://${API_HOST}:${API_PORT}`;
 
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
 const GLOBALS = {

@@ -1,14 +1,29 @@
-import {apiUserUrl} from '../services/api'
-import RegisterStore from '../stores/RegisterStore'
+import {signupUrl} from '../services/api'
+import registerStore from '../stores/registerStore'
+
+export function createUserCb(cb) {
+  axios.post(signupUrl(), {
+    email: registerStore.email,
+    password: registerStore.password,
+  })
+    .then(response => cb(null, response.json()))
+    .catch(function (error) {
+      cb(error, null);
+    });
+}
 
 export function createUser() {
-  return fetch(apiUserUrl('new'), {
-    method: 'POST',
-    body: JSON.stringify({
-      firstname: RegisterStore.firstname,
-      lastname: RegisterStore.lastname,
-      email: RegisterStore.email,
-      password: RegisterStore.password,
-    })
-  }).then(response => response.json());
+  return new Promise((resolve, reject) => {
+    axios.post(signupUrl(), {
+      email: registerStore.email,
+      password: registerStore.password,
+    }).then(response => {
+        resolve(response);
+      })
+      .catch(error => {
+        reject(error);
+        // return reject(error);
+      });
+  });
+
 }

@@ -22,6 +22,12 @@ class MainLayout extends Component {
   }
   handleClose = () => this.setState({open: false});
 
+  cons(matchProps) {
+    console.log(matchProps);
+
+
+  }
+
   render() {
     var {component: Component, ...rest} = this.props;
     const navStyle = {
@@ -45,22 +51,22 @@ class MainLayout extends Component {
           <div className="DefaultLayout">
                 <AppBar style={{backgroundColor: grey900, position: "fixed", top: 0}} title="RZik" 
                   onLeftIconButtonTouchTap={this._handleClick.bind(this)}
-                />
-                <Drawer
-                  className="MY_LeftNav"
-                  docked={true}
-                  width={200}
-                  open={this.state.open}
-                  containerStyle={navStyle}
-                  onRequestChange={(open) => this.setState({open})}
-                >
-                  <MenuItem onTouchTap={this.handleClose}>Menu Item</MenuItem>
-                  <MenuItem onTouchTap={this.handleClose}>Menu Item 2</MenuItem>
-                </Drawer>
-                <div style={contentStyle} className="DefaultLayoutComponent">
-                  <Component {...matchProps} />
-                </div>
+          />
+          <Drawer
+            className="MY_LeftNav"
+            docked={true}
+            width={200}
+            open={this.state.open}
+            containerStyle={navStyle}
+            onRequestChange={(open) => this.setState({open})}
+          >
+            <MenuItem onTouchTap={this.handleClose}>Menu Item</MenuItem>
+            <MenuItem onTouchTap={this.handleClose}>Menu Item 2</MenuItem>
+          </Drawer>
+          <div style={contentStyle} className="DefaultLayoutComponent">
+            <Component {...matchProps} />
           </div>
+        </div>
       )} />
     )
   }
