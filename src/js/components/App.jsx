@@ -11,6 +11,8 @@ import Home    from './Home';
 import MainLayout    from './layouts/MainLayout';
 import AuthLayout    from './layouts/AuthLayout';
 import NotFound    from './NotFound';
+import Auth from '../services/auth'
+
 require('font-awesome/css/font-awesome.css');
 require('flexboxgrid/css/flexboxgrid.css');
 
@@ -20,7 +22,7 @@ if (process.env.NODE_ENV !== 'production') {
     // Turn on logging changes button programmatically:
     logEnabled: true,
     // Turn off displaying conponents' updates button programmatically:
-    updatesEnabled: false,
+    updatesEnabled: true,
     // Log only changes of type `reaction`
     // (only affects top-level messages in console, not inside groups)
     logFilter: change => change.type === 'reaction',

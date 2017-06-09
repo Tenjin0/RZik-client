@@ -27,14 +27,13 @@ class MainLayout extends Component {
     const navStyle = {
       top: 64,
       height: (window.innerHeight - 64),
-      position: 'absolute'
     };
-    const contentStyle = {  transition: 'margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)' };
+    const contentStyle = {};
     if (this.state.open) {
-      contentStyle.marginLeft = 256;
-      contentStyle.width = '79%';
+      contentStyle.marginLeft = 220;
+      // contentStyle.width = '79%';
     } else {
-      contentStyle.width = '97%';
+      // contentStyle.width = '97%';
     }
     var menuItems = [
       { route: 'get-started', text: 'Get Started' },
@@ -44,7 +43,7 @@ class MainLayout extends Component {
     return (
       <Route {...rest} render={matchProps => (
           <div className="DefaultLayout">
-                <AppBar style={{backgroundColor: grey900}} title="RZik" 
+                <AppBar style={{backgroundColor: grey900, position: "fixed", top: 0}} title="RZik" 
                   onLeftIconButtonTouchTap={this._handleClick.bind(this)}
                 />
                 <Drawer
@@ -68,21 +67,19 @@ class MainLayout extends Component {
 
 }
 const resizeLeftNav = () => {
-  console.log(window.pageYOffset)
+  // console.log(window.pageYOffset)
   const leftNav = document.getElementsByClassName('MY_LeftNav')[0];
   if (leftNav) {
     leftNav.style.height = (window.innerHeight - 64) + 'px';
   }
 };
 // window.addEventListener('resize', resizeLeftNav, false);
-window.addEventListener('scroll', () => {
-  console.log(window.pageYOffset)
-   const leftNav = document.getElementsByClassName('MY_LeftNav')[0];
-  if (leftNav) {
-    console.log(leftNav.style.top, window.pageYOffset, leftNav.style.top - window.pageYOffset)
-    leftNav.style.top = (0) + 'px !important';
-  }
-}, false);
+// window.addEventListener('scroll', () => {
+//    const leftNav = document.getElementsByClassName('MY_LeftNav')[0];
+//   if (leftNav) {
+//     leftNav.style.top = (0) + 'px !important';
+//   }
+// }, false);
 // const MainLayout = ({component: Component, ...rest}) => {
 //     console.warn(Component, rest);
   

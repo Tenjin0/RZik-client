@@ -34,7 +34,10 @@ class SelectGender extends Component {
       ));
     }
     
-    handleChange = (event, index, values) => this.props.genderStore.setSelectedGenders(values);
+    handleChange = (event, index, values) => {
+        console.warn(values);
+        this.props.genderStore.setSelectedGenders(values);
+    }
 
     render() {
         var values = this.props.genderStore.genders;

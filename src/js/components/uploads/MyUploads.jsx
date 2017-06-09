@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
+import { observer, inject } from 'mobx-react';
+import uploadFormStore from '../../stores/uploadFormStore'
 
+@inject('uploadFormStore') @observer
 class MyUploads extends Component {
+    constructor() {
+        super()
+    }
 
+    onClick() {
+        this.props.uploadFormStore.setIsFileLoaded(!this.props.uploadFormStore.isFileLoaded)
+    }
     render() {
-        console.warn('toto')
         return (
             <div>
-                <CustomInputFile accept="image/*" className="margin-top" name="cover" onchange={ this.onChangeCoverFile.bind(this)}>
-                    <AddPhoto />
-                </CustomInputFile>
-                
-                <div ref="image_cover" id="image_cover"></div>
+                {this.props.uploadFormStore.isFileLoaded ? 'true' : 'false'}
+                <button onClick={this.onClick.bind(this)}>Submit</button>
             </div>  
         );
     }

@@ -7,6 +7,7 @@ class GenderStore {
 
   constructor(genders = []) {
     this.genders = genders;
+    this.selectedGenders = [];
   }
 
   @action setGenders = (genders) => {
@@ -15,7 +16,11 @@ class GenderStore {
 
   @action setSelectedGenders = (genders) => {
     if (genders.length === 0) genders = null;
-
+    for(var i = 0; i< genders.length ; i++) {
+      if (typeof genders[i] === "object" && genders[i]) {
+        genders[i] = genders[i].id
+      }
+    }
     this.selectedGenders = genders;
   }
 
