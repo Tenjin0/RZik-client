@@ -9,7 +9,6 @@ export function fetchPlaylists() {
       })
       .catch(error => {
         reject(error);
-        // return reject(error);
       });
   });
 

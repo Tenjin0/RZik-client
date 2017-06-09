@@ -1,8 +1,10 @@
 import {observable, computed} from "mobx";
 
 class PlaylistStore {
-  @observable nbPlaylist = '';
-  @observable playlists = [];
+  @observable name = '';
+  @observable description = '';
+  @observable audiofiles = '';
+  @observable user = '';
 
 
 }

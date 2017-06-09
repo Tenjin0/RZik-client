@@ -20,3 +20,7 @@ export function signupUrl() {
 export function playlistUrl() {
   return `${FULL_API_URL}/${ENDPOINTS.PLAYLIST}`
 }
+
+export function userUrl() {
+  return `${FULL_API_URL}/${ENDPOINTS.USERS}`
+}

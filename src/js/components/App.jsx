@@ -1,8 +1,8 @@
-import React , {Component} from 'react';
-import DevTool, { configureDevtool } from 'mobx-react-devtools';
+import React, {Component} from 'react';
+import DevTool, {configureDevtool} from 'mobx-react-devtools';
 import {autorun, observable} from 'mobx';
-import { Switch, Route, BrowserRouter } from 'react-router-dom'
-import { Router, IndexRoute } from 'react-router';
+import {Switch, Route, BrowserRouter} from 'react-router-dom'
+import {Router, IndexRoute} from 'react-router';
 import Login from './Login';
 import MyUploads from './uploads/MyUploads';
 import Upload from './uploads/Upload';
@@ -18,7 +18,7 @@ require('font-awesome/css/font-awesome.css');
 require('flexboxgrid/css/flexboxgrid.css');
 
 if (process.env.NODE_ENV !== 'production') {
-    // Any configurations are optional
+  // Any configurations are optional
   configureDevtool({
     // Turn on logging changes button programmatically:
     logEnabled: true,
@@ -30,27 +30,27 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 export default class App extends Component {
-    constructor(props, context) {
-        super(props, context);
-    }
+  constructor(props, context) {
+    super(props, context);
+  }
 
-    render() {
-        return (
-            <BrowserRouter>
-                <div>
-                    <Switch>
-                        <MainLayout exact path='/' component={Home}/>
-                        <MainLayout exact path='/uploads' component={MyUploads}/>
-                        <MainLayout exact path='/uploads/new' component={Upload}/>
-                        <MainLayout exact path='/uploads/:number([0-9]+)' component={Upload}/>
-                        <AuthLayout exact path="/login" component={Login} />
-                        <AuthLayout exact path='/register' component={Registration}/>
-                        <AuthLayout exact path='/playlist' component={Playlist}/>
-                      <Route component={NotFound} />
-                    </Switch>
-                    <DevTool />
-                </div>
-            </BrowserRouter>
-        );
-    }
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <Switch>
+            <AuthLayout exact path="/login" component={Login}/>
+            <AuthLayout exact path='/register' component={Registration}/>
+            <MainLayout exact path='/' component={Home}/>
+            <MainLayout exact path='/uploads' component={MyUploads}/>
+            <MainLayout exact path='/uploads/new' component={Upload}/>
+            <MainLayout exact path='/uploads/:number([0-9]+)' component={Upload}/>
+            <MainLayout exact path='/playlist' component={Playlist}/>
+            <Route component={NotFound}/>
+          </Switch>
+          <DevTool />
+        </div>
+      </BrowserRouter>
+    );
+  }
 }
