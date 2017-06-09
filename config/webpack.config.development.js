@@ -6,6 +6,7 @@ let NODE_ENV = process.env.NODE_ENV;
 const API_PORT = process.env.API_PORT || '3001';
 const API_HOST = process.env.API_HOST || 'localhost';
 let API_URL = `http://${API_HOST}:${API_PORT}`;
+const FULL_API_URL = `${API_URL}/api`;
 
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
 const GLOBALS = {
@@ -13,6 +14,7 @@ const GLOBALS = {
     'NODE_ENV': JSON.stringify(NODE_ENV)
   },
   'API_URL' : JSON.stringify(API_URL),
+  'FULL_API_URL' : JSON.stringify(FULL_API_URL),
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'true'))
 };
 

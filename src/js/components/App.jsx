@@ -10,6 +10,8 @@ import Home    from './Home';
 import MainLayout    from './layouts/MainLayout';
 import AuthLayout    from './layouts/AuthLayout';
 import NotFound    from './NotFound';
+import Playlist    from './Playlist';
+
 import Registration from "./Registration/index";
 import Language from './Language';
 require('font-awesome/css/font-awesome.css');
@@ -21,7 +23,7 @@ if (process.env.NODE_ENV !== 'production') {
     // Turn on logging changes button programmatically:
     logEnabled: true,
     // Turn off displaying conponents' updates button programmatically:
-    updatesEnabled: true,
+    updatesEnabled: false,
     // Log only changes of type `reaction`
     // (only affects top-level messages in console, not inside groups)
     logFilter: change => change.type === 'reaction',
@@ -36,23 +38,24 @@ export default class App extends Component {
        
     }
 
-    render() {
-        return (
-            <BrowserRouter>
-                <div>
-                    <Switch>
-                        <MainLayout exact path='/' component={Home}/>
-                        <MainLayout exact path='/uploads' component={MyUploads}/>
-                        <MainLayout exact path='/language' component={Language}/>
-                        <MainLayout exact path='/uploads/new' component={Upload}/>
-                        <MainLayout exact path='/uploads/:number([0-9]+)' component={Upload}/>
-                        <AuthLayout exact path="/login" component={Login} />
-                        <AuthLayout exact path='/register' component={Registration}/>
-                      <Route component={NotFound} />
-                    </Switch>
-                    <DevTool />
-                </div>
-            </BrowserRouter>
-        );
-    }
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <Switch>
+            <AuthLayout exact path="/login" component={Login}/>
+            <AuthLayout exact path='/register' component={Registration}/>
+            <MainLayout exact path='/' component={Home}/>
+            <MainLayout exact path='/language' component={Language}/>
+            <MainLayout exact path='/uploads' component={MyUploads}/>
+            <MainLayout exact path='/uploads/new' component={Upload}/>
+            <MainLayout exact path='/uploads/:number([0-9]+)' component={Upload}/>
+            <MainLayout exact path='/playlist' component={Playlist}/>
+            <Route component={NotFound}/>
+          </Switch>
+          <DevTool />
+        </div>
+      </BrowserRouter>
+    );
+  }
 }
