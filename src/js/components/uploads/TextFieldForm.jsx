@@ -18,32 +18,34 @@ class  TextFieldForm extends Component {
             this.props.uploadFormStore.setForm(args)
         }
     }
+
+    componentDidMount() {
+    }
     render() {
         var hint;
-        if (this.props.type !== undefined) {
+        if (this.props.type === undefined) {
             hint = 'choose a ' + this.props.name;
         }
+        console.warn(this.props.type)
         return(
             <div>
-            
-            <TextField
-                id={this.props.name}
-                name={this.props.name}
-                hintText= {hint}
-                style = {this.props.style}
-                floatingLabelText={this.props.name}
-                floatingLabelFixed={true}
-                type = {this.props.type}
-                step={this.props.step}
-                min={this.props.min}
-                max={this.props.max}
-                multiLine={this.props.multiLine ? true : false}
-                rows={this.props.rows ? this.props.rows : 1}
-                rowsMax={this.props.rowsMax ? this.props.rowsMax : 1}
-                value={this.props.uploadFormStore[this.props.name]}
-                onChange={this.handleChange.bind(this)}
-            />
-        </div>
+                <TextField
+                    id={this.props.name}
+                    name={this.props.name}
+                    hintText= {hint}
+                    style = {this.props.style}
+                    floatingLabelText={this.props.name}
+                    floatingLabelFixed={true}
+                    type = {this.props.type}
+                    step={this.props.step}
+                    min={this.props.min}
+                    max={this.props.max}
+                    multiLine={this.props.multiLine ? true : false}
+                    rows={this.props.rows ? this.props.rows : 1}
+                    rowsMax={this.props.rowsMax ? this.props.rowsMax : 1}
+                    onChange={this.handleChange.bind(this)}
+                />
+            </div>
         )
     }
 }

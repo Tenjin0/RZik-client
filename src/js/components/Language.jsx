@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom'
 import { observer, inject } from 'mobx-react';
-import uploadFormStore from '../../stores/uploadFormStore'
 import { FormattedMessage } from 'react-intl';
 
-@inject('uploadFormStore','locale') @observer
-class MyUploads extends Component {
+@inject('locale') @observer
+class Langugage extends Component {
     constructor() {
         super()
     }
@@ -16,12 +14,11 @@ class MyUploads extends Component {
     }
 
     componentDidMount() {
-        console.warn(this.context);
-        console.warn(this.props)
     }
     render() {
         return (
             <div>
+                {this.props.locale.formatMessage("app.welcome")}
                 <FormattedMessage id="app.welcome"/ >
                 <button onClick={this.onClick.bind(this)}>Submit</button>
             </div>  
@@ -29,4 +26,4 @@ class MyUploads extends Component {
     }
 }
 
-export default MyUploads;
+export default Langugage;

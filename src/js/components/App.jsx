@@ -11,8 +11,7 @@ import MainLayout    from './layouts/MainLayout';
 import AuthLayout    from './layouts/AuthLayout';
 import NotFound    from './NotFound';
 import Registration from "./Registration/index";
-import { IntlProvider, addLocaleData } from 'react-intl';
-
+import Language from './Language';
 require('font-awesome/css/font-awesome.css');
 require('flexboxgrid/css/flexboxgrid.css');
 
@@ -32,6 +31,10 @@ export default class App extends Component {
     constructor(props, context) {
         super(props, context);
     }
+    
+    componentDidMount() {
+       
+    }
 
     render() {
         return (
@@ -40,6 +43,7 @@ export default class App extends Component {
                     <Switch>
                         <MainLayout exact path='/' component={Home}/>
                         <MainLayout exact path='/uploads' component={MyUploads}/>
+                        <MainLayout exact path='/language' component={Language}/>
                         <MainLayout exact path='/uploads/new' component={Upload}/>
                         <MainLayout exact path='/uploads/:number([0-9]+)' component={Upload}/>
                         <AuthLayout exact path="/login" component={Login} />
