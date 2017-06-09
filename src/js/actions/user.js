@@ -1,4 +1,4 @@
-import {signupUrl} from '../services/api'
+import {signupUrl, userUrl} from '../services/api'
 import registerStore from '../stores/registerStore'
 
 export function createUserCb(cb) {
@@ -22,8 +22,16 @@ export function createUser() {
       })
       .catch(error => {
         reject(error);
-        // return reject(error);
       });
   });
+}
 
+export function fetchUser() {
+  return new Promise((resolve, reject) => {
+    axios.get(userUrl()).then(response => {
+      resolve(response);
+    }).catch(error => {
+        reject(error);
+      });
+  });
 }
