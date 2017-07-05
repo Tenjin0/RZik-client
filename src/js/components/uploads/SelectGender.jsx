@@ -45,6 +45,7 @@ class SelectGender extends Component {
            <SelectField
             floatingLabelText="Genders"
             multiple={true}
+            floatingLabelStyle={{ color : "white"}}
             hintText="Select a gender"
             errorText={this.props.uploadFormStore.errors.get('genders')}
             id="genders"

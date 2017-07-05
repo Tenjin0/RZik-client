@@ -71,7 +71,7 @@ class MainLayout extends Component {
       <Route {...rest} render={matchProps => (
         <div className="DefaultLayout">
 
-          <img id="logo" className="selector" src="images/logo.gif" width="100px" />
+          <img id="logo" className="selector" src="/images/logo.gif" width="100px" />
 
           <AppBar className="appNav"
                   onLeftIconButtonTouchTap={this._handleClick.bind(this)}
@@ -90,6 +90,7 @@ class MainLayout extends Component {
               <li><Link to='/register'>Register</Link></li>
               <li><Link to='/playlist'>Playlist</Link></li>
               <li><Link to='/uploads'>My uploads</Link></li>
+              <li><Link to='/uploads/me'>Upload file</Link></li>
               <li><Link to='/login'>Login</Link></li>
               <li><Link to='/music'>Music</Link></li>
             </ul>

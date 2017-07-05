@@ -163,7 +163,7 @@ class Upload extends Component {
                         }
                         {
                             this.props.uploadFormStore.isFileLoaded ?      
-                            <Cover/> :
+                            <Cover file={this.props.uploadFormStore.form.cover}/> :
                             ""
                         }
                     </Col>
