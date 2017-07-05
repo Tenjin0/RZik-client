@@ -1,22 +1,14 @@
-<<<<<<< HEAD
 import {Redirect, Route } from 'react-router-dom'
-=======
-import {Route} from 'react-router-dom'
->>>>>>> 977618e5e390c1f0fa9f7f8f6a2d1bdd18ba581e
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import {grey900} from 'material-ui/styles/colors';
 import MenuItem from 'material-ui/MenuItem';
-<<<<<<< HEAD
 import React, { Component } from 'react';
 import Auth from '../../services/auth'
 import Api from '../../services/api2'
 import { observer, inject } from 'mobx-react';
-=======
-import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import Player from '../Player';
->>>>>>> 977618e5e390c1f0fa9f7f8f6a2d1bdd18ba581e
 
 @inject('sessionStore') @observer
 class MainLayout extends Component {
