@@ -69,7 +69,14 @@ body {
     height: 0;
     pointer-events: none;
 }
-
+.card {
+    width: 250px;
+    .text {
+        font-style: normal;
+        color:grey !important;
+        font-weight: normal;
+    }
+}
 
 .appNav {
     background-color: #212121 !important;
