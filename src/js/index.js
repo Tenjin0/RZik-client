@@ -91,17 +91,17 @@ function processAudio(e) {
 window.addEventListener('load', _ => {
 
   // Seek song
-  function seek(e) {
+/*  function seek(e) {
     let percent = e.offsetX / this.offsetWidth;
     audio.currentTime = percent * audio.duration;
     progressBar.value = percent / 100;
-  }
+  }*/
 
 
   // get the audio element
   let audio = document.querySelector("#audioElement");
-  let progressBar = document.querySelector("progress");
-  progressBar.addEventListener("click", seek);
+  // let progressBar = document.querySelector("progress");
+  // progressBar.addEventListener("click", seek);
 
 
   audio.addEventListener('canplaythrough', _ => {
