@@ -2,13 +2,29 @@ import React, {Component} from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
+let audio = document.getElementById('audioElement');
 
 class Home extends Component {
-
-  play() {
-    // var audio = document.getElementById('audioElement');
-    // audio.play();
+  constructor(props, context) {
+    super(props, context);
+    this.props = props;
+    this.state = {
+      playing: 0
+    }
   }
+
+  handleMusic() {
+    var audio = document.getElementById('audioElement');
+    if(audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+    this.setState({
+      playing: this.state.playing++
+    });
+  }
+
 
   render() {
     return (
@@ -26,12 +42,10 @@ class Home extends Component {
           Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
         </CardText>
 
-        <a onClick={this.play()} href="#">PLAY</a>
-
         <CardActions>
-          <FlatButton label="PLAY"/>
+          <FlatButton onClick={this.handleMusic.bind(this)} label="PLAY" fullWidth={true} />
         </CardActions>
-
+        {this.state.playing}
       </Card>
     );
   }
