@@ -13,18 +13,8 @@ import { genderStore } from './stores';
 import * as stores from './stores';
 import './components/tap_events'
 import '../scss/app.scss'
-
-import {MobxIntlProvider, LocaleStore} from "mobx-react-intl"
-import { addLocaleData } from 'react-intl';
-import en from 'react-intl/locale-data/en';
-import fr from 'react-intl/locale-data/fr';
-import translationsEn from './../translations/en.js';
-import translationsfr from './../translations/fr.js';
-addLocaleData([...en, ...fr]);
-
-var language = 'en';
-const localeStore = new LocaleStore(language, {en : translationsEn, fr : translationsfr});
-localeStore.value = language
+import localeStore from './stores/localStore'
+import {MobxIntlProvider} from "mobx-react-intl"
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -48,6 +38,10 @@ const render = () => {
 ,
     document.getElementById('root')
   )
+}
+
+if (process.env.NODE_ENV === 'development') {
+  window.stores = {...stores}; // access stores in browser console for DEBUG purpose
 }
 
 render()

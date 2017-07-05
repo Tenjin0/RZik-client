@@ -3,8 +3,9 @@ import { Switch, Route } from 'react-router-dom'
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import { observer, inject } from 'mobx-react';
+import Api from '../../services/api2';
 
-@inject('genderStore') @observer
+@inject('genderStore', 'uploadFormStore') @observer
 class SelectGender extends Component {
     constructor(props, context) {
         super(props, context);
@@ -12,7 +13,7 @@ class SelectGender extends Component {
         };
     }
     componentDidMount() {
-        axios.get('http://localhost:3001/api/genders')
+        new Api().get('genders')
         .then(res => {
             this.props.genderStore.setGenders(res.data);
             // const posts = res.data.data.children.map(obj => obj.data);
@@ -35,7 +36,6 @@ class SelectGender extends Component {
     }
     
     handleChange = (event, index, values) => {
-        console.warn(values);
         this.props.genderStore.setSelectedGenders(values);
     }
 
@@ -43,8 +43,10 @@ class SelectGender extends Component {
         var values = this.props.genderStore.genders;
         return (
            <SelectField
+            floatingLabelText="Genders"
             multiple={true}
             hintText="Select a gender"
+            errorText={this.props.uploadFormStore.errors.get('genders')}
             id="genders"
             name="genders"
             onChange={this.handleChange.bind(this)}

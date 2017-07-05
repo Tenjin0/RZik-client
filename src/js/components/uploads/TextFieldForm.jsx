@@ -19,16 +19,39 @@ class  TextFieldForm extends Component {
         }
     }
 
+    onInputYear(e) {
+        console.warn(e.target.value);
+        e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,4)
+    }
     componentDidMount() {
+    }
+    
+    shouldComponentUpdate(nextProps, nextState) {
+        return true
     }
     render() {
         var hint;
         if (this.props.type === undefined) {
             hint = 'choose a ' + this.props.name;
+        } else {
+            hint = this.props.placeholder
         }
-        console.warn(this.props.type)
+        // if (!this.props.uploadFormStore.form.get(this.props.name)) {
+        //     hint = null;
+        // }
+        var type;
+        if (this.props.type === 'year') {
+            type= "number";
+        } else {
+            type = this.props.type;
+        }
+        var styleErrors = {}
+        if (this.props.uploadFormStore.errors.get(this.props.name).length > 0) {
+            styleErrors.marginBottom = "-20px"
+        }
         return(
-            <div>
+                    
+            <div style={ styleErrors }>
                 <TextField
                     id={this.props.name}
                     name={this.props.name}
@@ -36,14 +59,18 @@ class  TextFieldForm extends Component {
                     style = {this.props.style}
                     floatingLabelText={this.props.name}
                     floatingLabelFixed={true}
-                    type = {this.props.type}
+                    type = {type}
                     step={this.props.step}
                     min={this.props.min}
                     max={this.props.max}
                     multiLine={this.props.multiLine ? true : false}
+                    maxLength = {this.props.maxlength}
                     rows={this.props.rows ? this.props.rows : 1}
                     rowsMax={this.props.rowsMax ? this.props.rowsMax : 1}
                     onChange={this.handleChange.bind(this)}
+                    onInput={this.props.type === 'year' ? this.onInputYear.bind(this): () => {}}
+                    errorText= {this.props.uploadFormStore.errors.get(this.props.name)}
+                    value={this.props.uploadFormStore.form.get(this.props.name)}
                 />
             </div>
         )

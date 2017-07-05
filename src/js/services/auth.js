@@ -1,19 +1,22 @@
+import cookie from 'js-cookie';
+import {OAUTH_TOKEN} from '../constants/authentification';
+
 export default class Auth {
 
-    static authenticateUser(token) {
-        window.localStorage.setItem('token', token);
+    static setToken(token) {
+       cookie.set(OAUTH_TOKEN, token)
     }
 
     static getAuthenticatedToken()  {
-        return window.localStorage.getItem("token");
+        return cookie.get(OAUTH_TOKEN)
     }
 
     static isUserAuthenticated() {
-        return window.localStorage.getItem('token') !== null;
+        return cookie.get(OAUTH_TOKEN) !== undefined;
     }
 
     static deauthenticateUser() {
-        localStorage.removeItem('token');
+        Cookies.remove(OAUTH_TOKEN);
     }
 }
 

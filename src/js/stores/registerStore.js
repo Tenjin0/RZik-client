@@ -15,4 +15,4 @@ class RegisterStore {
 const registerStore = new RegisterStore();
 
 export default registerStore;
-export { registerStore };
+export { RegisterStore };

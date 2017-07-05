@@ -22,6 +22,7 @@ function log() {
     arguments[0] = '\nWebpack: ' + arguments[0];
     console.log.apply(console, arguments);
 }
+app.use('/images', express.static('src/images'));
 
 app.use(webpackDevMiddleware(compiler, {
     noInfo: false,

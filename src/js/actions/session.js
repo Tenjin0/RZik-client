@@ -1,27 +1,26 @@
-import Cookies from 'js-cookie';
 import {authUrl} from '../services/api';
-import {OAUTH_TOKEN} from '../services/api';
-import SessionStore from '../stores/SessionStore';
+import Auth from '../services/auth'
+import Api from '../services/api2'
+import {observer, inject} from "mobx-react";
 
-export function login(email, password) {
-  fetch((authUrl()), {
-    method: 'POST',
-    body: JSON.stringify({
+export function login(sessionStore, email, password) {
+   return new Promise((resolve, reject) => {
+    axios.post(API_URL +'/signin', {
       email: email,
-      password: password
-    })
-  }).then(response => response.json())
-    .then(token => {
-        Cookies.set(OAUTH_TOKEN, token);
-        SessionStore.token = token;
-        SessionStore.user = user;
-      }
-    );
-
+      password: password,
+    }).then(response => {
+        Auth.setToken(response.data.token)
+        sessionStore.token = response.data.token;
+        sessionStore.user = response.data.user;
+        resolve(response);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
 }
 
-export function logout() {
-  Cookies.remove(OAUTH_TOKEN);
-
-  SessionStore.reset();
+export function logout(sessionStore) {
+  Auth.deauthenticateUser()
+  sessionStore.reset();
 }

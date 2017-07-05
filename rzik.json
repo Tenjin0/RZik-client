@@ -1,0 +1,35 @@
+{
+  "apps": [
+    {
+			"name": "rzik-server",
+			"cwd": "../RZik-server",
+			"script": "./bin/www",
+				"watch": [
+				"*.js",
+				"controllers",
+				"middlewares",
+				"server",
+				"helpers",
+				"routes"
+			],
+			"watch_options": {
+				"followSymlinks": false
+			},
+			"env": {
+				"NODE_ENV": "development",
+			  "API_PORT": "3001",
+				"API_HOST":"localhost"
+			}
+    },
+    {
+			"name": "rzik-client",
+			"cwd": "./",
+			"script": "./server.js",
+			"env": {
+					"NODE_ENV": "development",
+					"API_PORT": "3001",
+					"API_HOST":"localhost"
+			}
+  	}
+  ]
+}

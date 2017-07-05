@@ -11,29 +11,29 @@ class CheckBoxForm extends Component {
     }  
 
     handleChange(e, isInputChecked) {
-        if (this.props.store['set' + this.capitalizeFirstLetter(this.props.name)]) {
-            this.props.store['set' + this.capitalizeFirstLetter(this.props.name)](isInputChecked);
-        } else if (this.props.store.setForm) {
+        if (this.props.uploadFormStore['set' + this.capitalizeFirstLetter(this.props.name)]) {
+            this.props.uploadFormStore['set' + this.capitalizeFirstLetter(this.props.name)](e.target.value);
+        } else if (this.props.uploadFormStore.setForm) {
             var args = {}
             args[this.props.name] = isInputChecked
-            this.props.store.setForm(args)
+            this.props.uploadFormStore.setForm(args)
         }
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-
         return true
     }
     render() {
-        if (typeof this.props.store[this.props.name])
-        return(<Checkbox
-            id={this.props.name}
-            name={this.props.name}
-            label={this.props.name}
-            style = {this.props.style}
-            checked={this.props.store[this.props.name]}
-            onCheck={this.handleChange.bind(this)}
-        />)
+        return(
+            <Checkbox
+                id={this.props.name}
+                name={this.props.name}
+                label={this.props.name}
+                style = {this.props.style}
+                checked={this.props.uploadFormStore.form.get(this.props.name)}
+                onCheck={this.handleChange.bind(this)}
+            />
+        )
     }
 }
 

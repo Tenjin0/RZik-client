@@ -1,4 +1,4 @@
-import userStore from './userStore';
+import sessionStore from './sessionStore';
 import trackStore from './trackStore';
 import genderStore from './genderStore';
 import uploadStore from './uploadStore';
@@ -7,7 +7,7 @@ import registerStore from './registerStore';
 import playlistStore from './playlistStore';
 
 export {
-    userStore,
+    sessionStore,
     trackStore,
     genderStore,
     uploadStore,

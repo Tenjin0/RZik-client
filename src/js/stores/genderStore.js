@@ -15,7 +15,7 @@ class GenderStore {
   }
 
   @action setSelectedGenders = (genders) => {
-    if (genders.length === 0) genders = null;
+    // if (genders.length === 0) genders = null; // DEBUG why ?
     for(var i = 0; i< genders.length ; i++) {
       if (typeof genders[i] === "object" && genders[i]) {
         genders[i] = genders[i].id

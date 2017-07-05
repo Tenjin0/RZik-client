@@ -1,10 +1,14 @@
-import {  Route } from 'react-router-dom'
+import {Redirect, Route } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import {grey900} from 'material-ui/styles/colors';
 import MenuItem from 'material-ui/MenuItem';
 import React, { Component } from 'react';
+import Auth from '../../services/auth'
+import Api from '../../services/api2'
+import { observer, inject } from 'mobx-react';
 
+@inject('sessionStore') @observer
 class MainLayout extends Component {
   constructor(props, context) {
       super(props, context);
@@ -22,10 +26,20 @@ class MainLayout extends Component {
   }
   handleClose = () => this.setState({open: false});
 
-  cons(matchProps) {
-    console.log(matchProps);
-
-
+  componentDidMount() {
+    new Api().get('users/myinfo')
+    .then((res) => {
+      var Roles = res.data.user.Roles;
+      var roles = [];
+      Roles.forEach(function(element) {
+        roles.push(element.role);
+      }, this);
+      this.props.sessionStore.setUser(res.data.user);
+      this.props.sessionStore.setRoles(roles);
+    })
+    .catch((err) => {
+      console.warn(err);
+    })
   }
 
   render() {
@@ -48,6 +62,7 @@ class MainLayout extends Component {
     ];
     return (
       <Route {...rest} render={matchProps => (
+        Auth.isUserAuthenticated() ?
           <div className="DefaultLayout">
                 <AppBar style={{backgroundColor: grey900, position: "fixed", top: 0}} title="RZik" 
                   onLeftIconButtonTouchTap={this._handleClick.bind(this)}
@@ -66,7 +81,11 @@ class MainLayout extends Component {
           <div style={contentStyle} className="DefaultLayoutComponent">
             <Component {...matchProps} />
           </div>
-        </div>
+        </div> :
+        <Redirect to={{
+          pathname: '/login',
+          state: { from: matchProps.location }
+        }}/>
       )} />
     )
   }

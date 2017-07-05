@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { FormattedMessage } from 'react-intl';
+const src = require('../../images/Avatar.jpg');
 
 @inject('locale') @observer
 class Langugage extends Component {
@@ -21,6 +22,7 @@ class Langugage extends Component {
                 {this.props.locale.formatMessage("app.welcome")}
                 <FormattedMessage id="app.welcome"/ >
                 <button onClick={this.onClick.bind(this)}>Submit</button>
+                <img src={src} width="200px" heigth="200px"/>
             </div>  
         );
     }

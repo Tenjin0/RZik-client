@@ -14,7 +14,8 @@ import TextFieldForm from './TextFieldForm';
 import CheckboxForm from './CheckBoxForm';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
-
+import Api  from '../../services/api2'
+import moment from 'moment';
 
 @inject('uploadFormStore', 'genderStore') @observer
 class Upload extends Component {
@@ -29,17 +30,15 @@ class Upload extends Component {
         e.event
         this.props.uploadFormStore.setIsFileLoaded(!this.props.uploadFormStore.isFileLoaded)
     }
+
     onChangeAudioFile(e) {
         var url = $(this.target).val();
         // var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
         var audiodata = document.querySelector('input[type="file"]#audio_file').files[0];
         var data = new FormData();
         data.append('audio_file',audiodata)
-        axios({
-            method: 'post',
-            url: "http://localhost:3001/api/audiofiles/metadata",
-            data: data
-        }).then(res => {
+        new Api().post('audiofiles/metadata', data)
+       .then(res => {
             this.props.uploadFormStore.setIsFileLoaded(true);
             // this.state.isFileloaded = true;
             // this.setState(this.state);
@@ -49,24 +48,25 @@ class Upload extends Component {
             console.warn(error);
         });
     }
+
     shouldComponentUpdate(nextProps, nextState) {
         // console.warn('shouldComponentUpdate');
         // console.warn(nextProps, nextState);
         return true
     }
-    componentWillMount() {
 
+    componentWillMount() {
     }
+
     componentDidMount() {
         this.props.uploadFormStore.setIsNew((this.props.match.path === '/uploads/new'))
         this.props.uploadFormStore.setIsFileLoaded((this.props.match.path !== '/uploads/new'))
         // console.warn(this.props.match.params.number)
         if (!this.props.uploadFormStore.isNew) {
-            axios({
-                method: 'get',
-                url: "http://localhost:3001/api/audiofiles/" + this.props.match.params.number
-            }).then(res => {
+            new Api().get('audiofiles/' + this.props.match.params.number)
+            .then(res => {
                 this.props.uploadFormStore.setIsFileLoaded(true);
+                //TODO change url to rzikclient
                 document.getElementById('image_cover').style.backgroundImage = 'url(' + "http://localhost:3001/api/audiofiles/" + this.props.match.params.number + '/cover)';
                 document.getElementById('show_image').style.display = "block"
                 this.props.uploadFormStore.setForm(res.data);
@@ -74,7 +74,6 @@ class Upload extends Component {
             // const posts = res.data.data.children.map(obj => obj.data);
             // this.setState({ posts });
             }).catch(error => {
-                console.warn(error);
             });
         }
     }
@@ -84,39 +83,49 @@ class Upload extends Component {
         // var audiodata = document.querySelector('input[type="file"]#audiofile').files[0];
         var data = new FormData(document.audiofileform);
         data.append('genders', this.props.genderStore.selectedGenders);
-        var url = "http://localhost:3001/api/audiofiles";
+        var url = "audiofiles";
         var method = "post";
         if (!this.props.uploadFormStore.isNew) {
-            url = "http://localhost:3001/api/audiofiles/" + this.props.match.params.number
+            url = "audiofiles/" + this.props.match.params.number
             method = "put"
         }
-        axios({
-            method: method,
-            url: url,
-            data: data
-        }).then(res => {
-            console.warn(res);
+        if (data.get('creation_date')) {
+            data.set('creation_date', 
+            moment().year(data.get('creation_date')).month(1).date(1).format('YYYY-MM-DD'))
+        }
+
+        if (data.get('explicit_content')) {
+            data.set('explicit_content',data.get('explicit_content') === "on")
+        }
+
+        if (data.get('download_authorization')) {
+            data.set('download_authorization',data.get('download_authorization') === "on")
+        }
+
+        new Api().send(method, url, data)
+        .then(res => {
+            // console.warn(res);
             // const posts = res.data.data.children.map(obj => obj.data);
             // this.setState({ posts });
-        }).catch(error => {
-            console.warn(error);
+            // this.props.history.push("/uploads")
+            this.props.uploadFormStore.setErrors();
+        }).catch((error, res)=> {
+            if (error.response && error.response.data) {
+                console.warn(error.response.data.errors);
+                this.props.uploadFormStore.setErrors(error.response.data.errors);
+            }
         });
-        // this.props.history.push("/uploads/4")
     }
 
     handleDelete(e) {
         e.preventDefault();
-        console.warn('delete');
-        axios({
-            method: "DELETE",
-            url: "http://localhost:3001/api/audiofiles/" + this.props.match.params.number
-        }).then(res => {
-            console.warn(res);
+
+        new Api().delete("audiofiles/" + this.props.match.params.number)
+        .then(res => {
             this.setState({open: false});
             // const posts = res.data.data.children.map(obj => obj.data);
             // this.setState({ posts });
         }).catch(error => {
-            console.warn(error);
         });
     }
 
@@ -181,10 +190,14 @@ class Upload extends Component {
                         <div>
                             <TextFieldForm
                                 name="creation_date"
-                                type="date"
+                                type="year"
+                                min="1900"
+                                max="2099"
+                                step="1"
+                                placeholder='YYYY'
+                                maxlength="4"
                                 style = {{ marginTop : "-5px" }}
                             />
-                            
                         </div>
                         <div>
                             <TextFieldForm
@@ -199,10 +212,10 @@ class Upload extends Component {
                     <Col xs={12} sm={12} md={4} >
                         <div>
                             <CheckboxForm
-                                name="explicit_content" store={this.props.uploadFormStore}
+                                name="explicit_content"
                             />
                             <CheckboxForm
-                                name="download_authorization" store={this.props.uploadFormStore}
+                                name="download_authorization"
                             />
                         </div>
                         <div className="upload-action-button">

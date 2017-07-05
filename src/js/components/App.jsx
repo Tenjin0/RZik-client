@@ -7,10 +7,12 @@ import Login from './Login';
 import MyUploads from './uploads/MyUploads';
 import Upload from './uploads/Upload';
 import Home    from './Home';
+import Admin    from './Admin';
 import MainLayout    from './layouts/MainLayout';
 import AuthLayout    from './layouts/AuthLayout';
 import NotFound    from './NotFound';
 import Playlist    from './Playlist';
+import Cookie from 'js-cookie';
 
 import Registration from "./Registration/index";
 import Language from './Language';
@@ -29,6 +31,8 @@ if (process.env.NODE_ENV !== 'production') {
     logFilter: change => change.type === 'reaction',
   });
 }
+console.warn(FULL_API_URL)
+// Cookie.set('token', "eyJhbGciOiJIUzI1NiJ9.Mg.EYDQZwnMUGYzeWB_DZ_li8PjtMptPnD5QRFDgITbCuw")
 export default class App extends Component {
     constructor(props, context) {
         super(props, context);
@@ -45,9 +49,11 @@ export default class App extends Component {
           <Switch>
             <AuthLayout exact path="/login" component={Login}/>
             <AuthLayout exact path='/register' component={Registration}/>
+            <MainLayout exact path='/admin' component={Admin}/>
             <MainLayout exact path='/' component={Home}/>
             <MainLayout exact path='/language' component={Language}/>
             <MainLayout exact path='/uploads' component={MyUploads}/>
+            <MainLayout exact path='/uploads/:who(me)' component={MyUploads}/>
             <MainLayout exact path='/uploads/new' component={Upload}/>
             <MainLayout exact path='/uploads/:number([0-9]+)' component={Upload}/>
             <MainLayout exact path='/playlist' component={Playlist}/>

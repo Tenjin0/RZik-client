@@ -108,4 +108,20 @@ form {
         box-shadow: 0 0 0px 1000px white inset;
         transition: background-color 5000s ease-in-out 0s;
     }
+
+}
+
+li.preview {
+    height: 90px;
+    .cover {
+        float: left;
+    }
+    .line div {
+        height: 25px;
+    }
+
+    .action {
+        height: 75px;
+        float : right;
+    }
 }

@@ -1,30 +1,44 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
 import { observer, inject } from 'mobx-react';
-import uploadFormStore from '../../stores/uploadFormStore'
 import { FormattedMessage } from 'react-intl';
+import Api  from '../../services/api2'
+import UploadPreview from './uploadPreview';
 
-@inject('uploadFormStore','locale') @observer
+@inject('uploadStore','locale') @observer
 class MyUploads extends Component {
-    constructor() {
-        super()
-    }
-
-    onClick() {
-        this.props.locale.value = this.props.locale.value  === 'en' ? 'fr' : 'en'
-        // this.props.locale.setIsFileLoaded(!this.props.uploadFormStore.isFileLoaded)
+    constructor(props, context) {
+        super(props, context);
     }
 
     componentDidMount() {
-        console.warn(this.context);
-        console.warn(this.props)
+        var endpoint = 'audiofiles';
+        if (this.props.match.params.who && this.props.match.params.who === "me") {
+            endpoint += '/myuploads';
+        }
+        (new Api()).get(endpoint)
+        .then(res => {
+            this.props.uploadStore.setUploads(res.data.audiofiles);
+            // this.props.genderStore.setGenders(res.data);
+            // const posts = res.data.data.children.map(obj => obj.data);
+            // this.setState({ posts });
+        }).catch(error => {
+            console.warn(error);
+        });
     }
+     
+    createUploadlist() {
+        console.warn(this.props.uploadStore.uploads);
+        return this.props.uploadStore.uploads.map((upload) => {
+            return <UploadPreview key={upload.id} preview={upload}/>
+        });
+    }
+
     render() {
         return (
-            <div>
-                <FormattedMessage id="app.welcome"/ >
-                <button onClick={this.onClick.bind(this)}>Submit</button>
-            </div>  
+            <ul>
+            {this.createUploadlist()}
+            </ul>
         );
     }
 }
