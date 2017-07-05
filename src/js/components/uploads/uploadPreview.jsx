@@ -11,7 +11,7 @@ class UploadPreview extends Component {
         return (
             <li className="preview">
              <div className="cover">
-                <img width="100" height="75" src={'/images/' + this.props.preview.cover}/>
+                <img width="100" height="75" src={'/images/cover/' + this.props.preview.cover}/>
              </div>
              <div className="action">
                 Actions
