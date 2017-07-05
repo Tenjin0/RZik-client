@@ -11,6 +11,7 @@ import MainLayout    from './layouts/MainLayout';
 import AuthLayout    from './layouts/AuthLayout';
 import NotFound    from './NotFound';
 import Playlist    from './Playlist';
+import Music    from './Music';
 
 import Registration from "./Registration/index";
 
@@ -46,6 +47,7 @@ export default class App extends Component {
             <MainLayout exact path='/uploads/new' component={Upload}/>
             <MainLayout exact path='/uploads/:number([0-9]+)' component={Upload}/>
             <MainLayout exact path='/playlist' component={Playlist}/>
+            <MainLayout exact path='/music' component={Music}/>
             <Route component={NotFound}/>
           </Switch>
           <DevTool />

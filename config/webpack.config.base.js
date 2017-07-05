@@ -60,7 +60,16 @@ module.exports = {
                     limit: 8192,
                     name: 'fonts/[name].[ext]?[hash]'
                 }
-            }
+            },
+              // Music
+              {
+                test: /\.(mp3|ogg|m4a)$/,
+                loader: 'url',
+                query: {
+                  limit: 8192,
+                  name: 'music/[name].[ext]?[hash]'
+                }
+              }
         ]
     }
 };

@@ -23,6 +23,9 @@ function log() {
     console.log.apply(console, arguments);
 }
 
+app.use(express.static('src/images/'));
+app.use(express.static('src/music/'));
+
 app.use(webpackDevMiddleware(compiler, {
     noInfo: false,
     publicPath: config.output.publicPath,
