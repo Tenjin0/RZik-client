@@ -15,5 +15,5 @@ npm-debug.log
 /.idea/
 /yarn.lock
 
-/src/images
+/src/images/cover
 .vscode/

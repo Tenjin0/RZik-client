@@ -1,30 +1,45 @@
+<<<<<<< HEAD
 import {Redirect, Route } from 'react-router-dom'
+=======
+import {Route} from 'react-router-dom'
+>>>>>>> 977618e5e390c1f0fa9f7f8f6a2d1bdd18ba581e
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import {grey900} from 'material-ui/styles/colors';
 import MenuItem from 'material-ui/MenuItem';
+<<<<<<< HEAD
 import React, { Component } from 'react';
 import Auth from '../../services/auth'
 import Api from '../../services/api2'
 import { observer, inject } from 'mobx-react';
+=======
+import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
+import Player from '../Player';
+>>>>>>> 977618e5e390c1f0fa9f7f8f6a2d1bdd18ba581e
 
 @inject('sessionStore') @observer
 class MainLayout extends Component {
   constructor(props, context) {
-      super(props, context);
-      this.props = props;
-      this.state =  {
-        open : false
-      }
+    super(props, context);
+    this.props = props;
+    this.state = {
+      open: true
+    }
   }
 
   _handleClick(e) {
       e.preventDefault();
       // Show/Hide the LeftMenu
-      this.state.open = !this.state.open
-      this.setState(this.state)
+      this.state.open = !this.state.open;
+      this.setState(this.state);
   }
-  handleClose = () => this.setState({open: false});
+
+  handleClose = (src) => {
+    console.log(src);
+    this.setState({open: false})
+
+  };
 
   componentDidMount() {
     new Api().get('users/myinfo')
@@ -62,31 +77,39 @@ class MainLayout extends Component {
     ];
     return (
       <Route {...rest} render={matchProps => (
-        Auth.isUserAuthenticated() ?
-          <div className="DefaultLayout">
-                <AppBar style={{backgroundColor: grey900, position: "fixed", top: 0}} title="RZik" 
+        <div className="DefaultLayout">
+
+          <img id="logo" className="selector" src="logo.gif" width="100px" />
+
+          <AppBar className="appNav"
                   onLeftIconButtonTouchTap={this._handleClick.bind(this)}
-          />
+            />
+
           <Drawer
-            className="MY_LeftNav"
+            className="leftNav"
             docked={true}
             width={200}
             open={this.state.open}
             containerStyle={navStyle}
             onRequestChange={(open) => this.setState({open})}
           >
-            <MenuItem onTouchTap={this.handleClose}>Menu Item</MenuItem>
-            <MenuItem onTouchTap={this.handleClose}>Menu Item 2</MenuItem>
+            <ul>
+              <li><Link to='/'>Home</Link></li>
+              <li><Link to='/register'>Register</Link></li>
+              <li><Link to='/playlist'>Playlist</Link></li>
+              <li><Link to='/login'>Login</Link></li>
+              <li><Link to='/music'>Music</Link></li>
+            </ul>
           </Drawer>
+
           <div style={contentStyle} className="DefaultLayoutComponent">
             <Component {...matchProps} />
           </div>
-        </div> :
-        <Redirect to={{
-          pathname: '/login',
-          state: { from: matchProps.location }
-        }}/>
-      )} />
+
+          <Player/>
+
+        </div>
+        )}/>
     )
   }
 
@@ -107,7 +130,7 @@ const resizeLeftNav = () => {
 // }, false);
 // const MainLayout = ({component: Component, ...rest}) => {
 //     console.warn(Component, rest);
-  
+
 // };
 
 export default MainLayout;
