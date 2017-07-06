@@ -29,7 +29,7 @@ class CheckBoxForm extends Component {
                 id={this.props.name}
                 name={this.props.name}
                 label={this.props.name}
-                inputStyle= {{ color: 'white'}}
+                iconStyle={{fill: "rgb(0, 188, 212)"}}                
                 labelStyle= {{ color: 'white'}}
                 style = {this.props.style}
                 checked={this.props.uploadFormStore.form.get(this.props.name)}

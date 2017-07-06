@@ -28,7 +28,6 @@ class MyUploads extends Component {
     }
      
     createUploadlist() {
-        console.warn(this.props.uploadStore.uploads);
         return this.props.uploadStore.uploads.map((upload) => {
             return <UploadPreview key={upload.id} preview={upload}/>
         });

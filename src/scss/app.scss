@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,700i,900i');
 
+$background : #0e0e0e;
 body {
     margin: 0;
-    background: #0e0e0e;
+    background: $background;
     color: white;
     font-family: Roboto, sans-serif;
     font-size: 15px;
@@ -25,7 +26,7 @@ body {
 
 
 .leftNav, .leftNav div {
-    background-color: #0e0e0e!important;
+    background-color: $background!important;
     color: #d1d1d1;
     ul {
         margin-top: 20px;
@@ -176,6 +177,7 @@ form {
         margin-top: 1em;
     }
 
+    input,
     input:-webkit-autofill,
     input:-webkit-autofill:hover,
     input:-webkit-autofill:focus
@@ -186,9 +188,12 @@ form {
     select:-webkit-autofill,
     select:-webkit-autofill:hover,
     select:-webkit-autofill:focus {
-        border: 0px solid white;
-        -webkit-box-shadow: 0 0 0px 1000px white inset;
-        box-shadow: 0 0 0px 1000px white inset;
+        border: 0px solid $background;
+        -webkit-box-shadow:0 0 0 50px white inset; /* Change the color to your own background color */
+        -webkit-text-fill-color: white;
+        background-color : $background;
+        -webkit-box-shadow: 0 0 0px 1000px $background inset;
+        box-shadow: 0 0 0px 1000px $background inset;
         transition: background-color 5000s ease-in-out 0s;
     }
 
@@ -198,6 +203,29 @@ li.preview {
     height: 90px;
     .cover {
         float: left;
+        position: relative;
+        .image {
+            background-size: cover !important;
+            width : 100px;
+            height : 75px;
+        }
+        .image-button {
+            position: absolute;
+            top:0px;
+            button {
+                display: none;
+                position: relative;
+                top: 30%;
+                left: 36%;
+                width: 36px;
+                height: 36px;
+                border: 1px solid white;
+                border-radius: 500px;
+                background-color: transparent;
+                color: #fff;
+                transition: transform 0.3s cubic-bezier(0, 0, 0, 2.41);
+            }
+        }
     }
     .line div {
         height: 25px;
@@ -206,5 +234,17 @@ li.preview {
     .action {
         height: 75px;
         float : right;
+    }
+}
+
+li.preview .cover:hover {
+    .image {
+        -webkit-filter: brightness(.3);
+        filter: brightness(.3);
+        -webkit-transition: .2s;
+        transition: .2s;
+        button {
+            display: block;
+        }
     }
 }

@@ -16,6 +16,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import Api  from '../../services/api2'
 import moment from 'moment';
+import {Redirect } from 'react-router-dom'
 
 @inject('uploadFormStore', 'genderStore') @observer
 class Upload extends Component {
@@ -23,7 +24,8 @@ class Upload extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            open : false
+            open : false,
+            fireRedirect : false
         }
     }
     onClick(e) {
@@ -45,17 +47,18 @@ class Upload extends Component {
             // const posts = res.data.data.children.map(obj => obj.data);
             // this.setState({ posts });
         }).catch(error => {
-            console.warn(error);
+            this.props.uploadFormStore.setIsFileLoaded(true);
         });
     }
 
+    componentWillReceiveProps(nextProps, nextState) {
+        console.warn(nextProps, nextState)
+    }
+    
     shouldComponentUpdate(nextProps, nextState) {
         // console.warn('shouldComponentUpdate');
         // console.warn(nextProps, nextState);
         return true
-    }
-
-    componentWillMount() {
     }
 
     componentDidMount() {
@@ -109,6 +112,8 @@ class Upload extends Component {
             // this.setState({ posts });
             // this.props.history.push("/uploads")
             this.props.uploadFormStore.setErrors();
+            this.state.fireRedirect = true;
+            this.setState(this.state);
         }).catch((error, res)=> {
             if (error.response && error.response.data) {
                 console.warn(error.response.data.errors);
@@ -152,6 +157,11 @@ class Upload extends Component {
         ];
         return (
             <form id="audiofileform" name="audiofileform" onSubmit={this.handleSubmit.bind(this)}>
+            {
+                this.state.fireRedirect ?
+                <Redirect to="/upload/me" push/> :
+                ""
+            }
                 <Row>
                     <Col xs={12} sm={6} md={4} >
                         {

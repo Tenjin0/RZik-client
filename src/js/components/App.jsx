@@ -4,6 +4,7 @@ import {autorun, observable} from 'mobx';
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import { Router, IndexRoute } from 'react-router';
 import Login from './Login';
+import Logout from './Logout';
 import MyUploads from './uploads/MyUploads';
 import Upload from './uploads/Upload';
 import Home    from './Home';
@@ -31,7 +32,6 @@ if (process.env.NODE_ENV !== 'production') {
     logFilter: change => change.type === 'reaction',
   });
 }
-console.warn(FULL_API_URL)
 
 export default class App extends Component {
     constructor(props, context) {
@@ -48,6 +48,7 @@ export default class App extends Component {
         <div>
           <Switch>
             <AuthLayout exact path="/login" component={Login}/>
+            <AuthLayout exact path="/logout" component={Logout}/>
             <AuthLayout exact path='/register' component={Registration}/>
             <MainLayout exact path='/admin' component={Admin}/>
             <MainLayout exact path='/' component={Home}/>

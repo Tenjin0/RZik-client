@@ -103,19 +103,20 @@ window.addEventListener('load', _ => {
   // let progressBar = document.querySelector("progress");
   // progressBar.addEventListener("click", seek);
 
+  if (audio) {
+    audio.addEventListener('canplaythrough', _ => {
+      let node = context.createMediaElementSource(audio);
 
-  audio.addEventListener('canplaythrough', _ => {
-    let node = context.createMediaElementSource(audio);
+      // create a node that will handle the animation, but won't alter the audio in any way
+      let processor = context.createScriptProcessor(4096, 1, 1);
+      processor.onaudioprocess = processAudio;
 
-    // create a node that will handle the animation, but won't alter the audio in any way
-    let processor = context.createScriptProcessor(4096, 1, 1);
-    processor.onaudioprocess = processAudio;
+      // connect the audio element to the node responsible for the animation
+      node.connect(processor);
 
-    // connect the audio element to the node responsible for the animation
-    node.connect(processor);
-
-    // connect the "animation" node to the output
-    processor.connect(context.destination);
-  });
+      // connect the "animation" node to the output
+      processor.connect(context.destination);
+    });
+  }
 });
 
