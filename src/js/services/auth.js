@@ -15,8 +15,9 @@ export default class Auth {
         return cookie.get(OAUTH_TOKEN) !== undefined;
     }
 
-    static deauthenticateUser() {
-        Cookies.remove(OAUTH_TOKEN);
+    static deauthenticateUser(sessionStore) {
+        cookie.remove(OAUTH_TOKEN);
+        sessionStore.reset();
     }
 }
 

@@ -56,8 +56,9 @@ class  TextFieldForm extends Component {
                     id={this.props.name}
                     name={this.props.name}
                     hintText= {hint}
+                    hintStyle= {{ color : "grey" }}
                     style = {this.props.style}
-                    inputStyle= {{ color : "white"}}
+                    inputStyle= {{ backgroundColor:"black !important" , color : "white  !important"}}
                     floatingLabelStyle= {{ color : "white"}}
                     floatingLabelText={this.props.name}
                     floatingLabelFixed={true}

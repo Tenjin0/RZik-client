@@ -28,11 +28,9 @@ class MainLayout extends Component {
   }
 
   handleClose = (src) => {
-    console.log(src);
     this.setState({open: false})
 
   };
-
   componentDidMount() {
     new Api().get('users/myinfo')
     .then((res) => {
@@ -70,7 +68,9 @@ class MainLayout extends Component {
     return (
       <Route {...rest} render={matchProps => (
         <div className="DefaultLayout">
-
+        {Auth.isUserAuthenticated()? "":
+        <Redirect to="/login" push/>
+        }
           <img id="logo" className="selector" src="/images/logo.gif" width="100px" />
 
           <AppBar className="appNav"
@@ -89,10 +89,14 @@ class MainLayout extends Component {
               <li><Link to='/'>Home</Link></li>
               <li><Link to='/register'>Register</Link></li>
               <li><Link to='/playlist'>Playlist</Link></li>
-              <li><Link to='/uploads'>My uploads</Link></li>
-              <li><Link to='/uploads/me'>Upload file</Link></li>
-              <li><Link to='/login'>Login</Link></li>
+              <li><Link to='/uploads/me'>My uploads</Link></li>
+              <li><Link to='/uploads/new'>Upload file</Link></li>
+              { Auth.isUserAuthenticated() ?
+              <li><Link to='/logout'>Logout</Link></li> :
+              <li><Link to='/login'>Login</Link></li> 
+              }
               <li><Link to='/music'>Music</Link></li>
+              <li><Link to='/language'>Test language</Link></li>
             </ul>
           </Drawer>
 
@@ -104,6 +108,7 @@ class MainLayout extends Component {
 
         </div>
         )}/>
+
     )
   }
 

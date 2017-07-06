@@ -10,13 +10,10 @@ export default class Registration extends Component {
 
     if (this.props.registerStore.isFullfilled) {
       createUser().then(response => {
-        alert('Inscription effectué');
         console.log('USER REGISTERED ', response);
       }).catch(err => {
         if(err.code = 102) {
-          alert('Email déjà pris');
         } else {
-          alert('Erreur interne');
         }
         console.log(err);
       });
