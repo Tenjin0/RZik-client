@@ -2,7 +2,6 @@ import React from 'react';
 import {Card, CardActions, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import PlayButton from './PlayButton'
 
-
 const ThemeCard = ({title, subtitle, img, handlePlay, playing, song, children}) => (
   <Card className="card" style={{display:'inline-block', margin: '30px 10px'}}>
     <CardMedia

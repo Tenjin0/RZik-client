@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ThemeCard from './Home/ThemeCard'
+import ThemeCard from './ThemeCard'
 
 
 class Home extends Component {
@@ -29,6 +29,16 @@ class Home extends Component {
 
   render() {
     return (
+    <div style={{paddingBottom: '50px'}}>
+      <div className="masthead">
+        <div className="selector background">
+
+        </div>
+        {/*<img className="selector" src="./rzik-masthead.jpg" />*/}
+        <span>
+            FEEL THE SOUND <i>EMOTION</i>
+        </span>
+      </div>
       <div style={{textAlign:'center', background : 'rgb(230,230,230)', paddingTop: '30px'}}>
         <p style={{color: 'black', fontSize: "20px"}}>
           TU AS ENVIE D'ECOUTER ?
@@ -41,21 +51,29 @@ class Home extends Component {
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-          Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-          Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
         </ThemeCard>
 
         <ThemeCard title="RAP US" subtitle="78666 Abonnés"
-                   img="http://www.brodaymedia.com/wp-content/uploads/2017/04/Cypress-Hill-420.jpg"
+                   img="https://s-media-cache-ak0.pinimg.com/originals/7a/dc/f9/7adcf99bce169933edb65b0687f16d02.jpg"
                    handlePlay={this.handlePlay.bind(this)}
                    playing={this.state.playing}
                    song="light_another.mp3">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-          Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
           Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
         </ThemeCard>
+
+        <ThemeCard title="RNB" subtitle="54546 Abonnés"
+                   img="http://runthetrap.com/wp-content/uploads/2016/02/work.jpg"
+                   handlePlay={this.handlePlay.bind(this)}
+                   playing={this.state.playing}
+                   song="work.mp3">
+          Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
+          Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+        </ThemeCard>
+
       </div>
+
+    </div>
 
 
 

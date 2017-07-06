@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {observer, inject} from "mobx-react";
-import {createUserCb, createUser} from "../../actions/user";
+import {createUser} from "../../actions/user";
 
 @inject(['registerStore']) @observer
 export default class Registration extends Component {
@@ -9,14 +9,6 @@ export default class Registration extends Component {
     event.preventDefault();
 
     if (this.props.registerStore.isFullfilled) {
-/*      createUserCb(err, result => {
-        if (result) {
-          alert('Inscription effectué');
-        } else {
-          alert('Error');
-        }
-      });*/
-
       createUser().then(response => {
         alert('Inscription effectué');
         console.log('USER REGISTERED ', response);
