@@ -4,16 +4,22 @@ import FlatButton from 'material-ui/FlatButton';
 
 let audio = document.getElementById('audioElement');
 
+function PlayButton(props) {
+  return (
+    <FlatButton onClick={props.handlePlay} label={props.label} fullWidth={true} />
+  );
+}
+
 class Home extends Component {
   constructor(props, context) {
     super(props, context);
     this.props = props;
     this.state = {
-      playing: 0
+      playing: false
     }
   }
 
-  handleMusic() {
+  handlePlay() {
     var audio = document.getElementById('audioElement');
     if(audio.paused) {
       audio.play();
@@ -21,7 +27,7 @@ class Home extends Component {
       audio.pause();
     }
     this.setState({
-      playing: this.state.playing++
+      playing: !this.state.playing
     });
   }
 
@@ -43,9 +49,13 @@ class Home extends Component {
         </CardText>
 
         <CardActions>
-          <FlatButton onClick={this.handleMusic.bind(this)} label="PLAY" fullWidth={true} />
+          {this.state.playing ?
+            <PlayButton handlePlay={this.handlePlay.bind(this)} label="pause"/>
+            :
+            <PlayButton handlePlay={this.handlePlay.bind(this)} label="play"/>
+          }
         </CardActions>
-        {this.state.playing}
+
       </Card>
     );
   }
