@@ -49,6 +49,7 @@ class Home extends Component {
                    playing={this.state.playing}
                    song="one_dance.m4a"
         >
+<<<<<<< Updated upstream:src/js/components/Home/index.js
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
         </ThemeCard>
@@ -60,6 +61,17 @@ class Home extends Component {
                    song="light_another.mp3">
           Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
           Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+=======
+          Lorem ipsum dolor sit amet
+        </ThemeCard>
+
+        <ThemeCard title="RAP US" subtitle="78666 Abonnés"
+                   img="/images/cover/cypresshill.jpg"
+                   handlePlay={this.handlePlay.bind(this)}
+                   playing={this.state.playing}
+                   song="light_another.mp3">
+          Lorem ipsum dolor sit amet.
+>>>>>>> Stashed changes:src/js/components/Home.jsx
         </ThemeCard>
 
         <ThemeCard title="RNB" subtitle="54546 Abonnés"

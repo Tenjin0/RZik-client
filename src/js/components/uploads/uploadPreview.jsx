@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import Auth from '../../services/auth'
+import { observer, inject } from 'mobx-react';
 
+@inject('trackStore') @observer
 class UploadPreview extends Component {
     constructor(props, context) {
         super(props, context);
@@ -11,17 +13,17 @@ class UploadPreview extends Component {
     }
 
     handleClick(e) {
-        console.warn(e)
         var player = document.getElementById('audioElement');
         if (player) {
             player.src = `${FULL_API_URL}/audiofiles/${this.props.preview.id}/stream?token=${Auth.getAuthenticatedToken()}`
         }
-        if (this.state.play) {
+        if (player.paused) {
             player.play();
         } else {
             player.pause();
         }
-        this.state.play =!this.state.play;
+        this.props.trackStore.setTrack(this.props.preview.cover, this.props.preview.title, this.props.preview.artist)
+        this.state.play = player.paused;
         this.setState(this.state)
     }
     render() {
@@ -46,7 +48,7 @@ class UploadPreview extends Component {
                 <div className="first_line">
                     { this.props.preview.title }
                 </div>
-                <div className="second_line">
+                <div className="second_line track-info__artist">
                     { this.props.preview.composer}
                 </div>
                 <div className="third_line">

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {observer, inject} from "mobx-react";
-import {createUser} from "../../actions/user";
+import {createUserCb, createUser} from "../../actions/user";
+import TextField from 'material-ui/TextField';
 
 @inject(['registerStore']) @observer
 export default class Registration extends Component {
@@ -34,14 +35,41 @@ export default class Registration extends Component {
     return (
       <div>
         <form onSubmit={this.register.bind(this)}>
-          <input name="email" type="email" value={email} onChange={this.onChange.bind(this)} placeholder="Email" required/>
-          <input name="emailConfirmation" type="email" value={emailConfirmation} onChange={this.onChange.bind(this)}
-                 placeholder="Email Confirmation" required/>
-          <input name="password" type="password" value={password} onChange={this.onChange.bind(this)}
-                 placeholder="Password" required/>
-          <input name="passwordConfirmation" type="password" value={passwordConfirmation}
-                 onChange={this.onChange.bind(this)}
-                 placeholder="Password Confirmation" required/>
+          <div>
+            
+            <TextField
+                name="email"
+                floatingLabelText="YOUR EMAIL"
+                floatingLabelStyle= {{ color : "white"}}
+                type = "email"
+                onChange={this.onChange.bind(this)}            
+                value={this.props.registerStore.email}
+            /><TextField
+                name="emailConfirmation"
+                floatingLabelText="Email Confirmation"
+                floatingLabelStyle= {{ color : "white"}}
+                type = "email"
+                onChange={this.onChange.bind(this)}            
+                value={emailConfirmation}
+            />
+                </div>
+                <div>
+                <TextField
+                    name="password"
+                    floatingLabelStyle= {{ color : "white"}}
+                    floatingLabelText="password"
+                    type = "password"
+                    onChange={this.onChange.bind(this)}            
+                    value={this.props.registerStore.password}
+                /><TextField
+                    name="passwordConfirmation"
+                    floatingLabelStyle= {{ color : "white"}}
+                    floatingLabelText="Password Confirmation"
+                    type = "password"
+                    onChange={this.onChange.bind(this)}            
+                    value={passwordConfirmation}
+                />
+                </div>
           <button>S'inscrire</button>
         </form>
       </div>

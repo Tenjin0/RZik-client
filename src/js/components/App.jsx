@@ -61,7 +61,6 @@ export default class App extends Component {
             <MainLayout exact path='/music' component={Music}/>
             <Route component={NotFound}/>
           </Switch>
-          {/*<DevTool />*/}
         </div>
       </BrowserRouter>
     );

@@ -52,6 +52,7 @@ class MainLayout extends Component {
     const navStyle = {
       top: 64,
       height: (window.innerHeight - 64),
+      boxShadow : ""
     };
     const contentStyle = {};
     if (this.state.open) {
@@ -87,15 +88,15 @@ class MainLayout extends Component {
           >
             <ul>
               <li><Link to='/'>Home</Link></li>
-              <li><Link to='/register'>Register</Link></li>
               <li><Link to='/playlist'>Playlist</Link></li>
               <li><Link to='/uploads/me'>My uploads</Link></li>
               <li><Link to='/uploads/new'>Upload file</Link></li>
+              <li><Link to='/music'>Music</Link></li>
+              <li><Link to='/register'>Register</Link></li>
               { Auth.isUserAuthenticated() ?
               <li><Link to='/logout'>Logout</Link></li> :
               <li><Link to='/login'>Login</Link></li> 
               }
-              <li><Link to='/music'>Music</Link></li>
               <li><Link to='/language'>Test language</Link></li>
             </ul>
           </Drawer>

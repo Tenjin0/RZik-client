@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {observer, inject} from "mobx-react";
 import {login} from "../actions/session";
 import {Redirect } from 'react-router-dom'
+import TextField from 'material-ui/TextField';
 
 @inject('registerStore', 'sessionStore') @observer
 class Login extends Component {
@@ -29,15 +30,32 @@ class Login extends Component {
     render() {
         const {email, password} = this.props.registerStore;
         return (
-              <div>
+              <div className="login-container">
                 {this.state.fireRedirect ?
                     <Redirect to="/" push/> : ""
                 }
                 <form onSubmit={this.handleLogin.bind(this)}>
-                <input name="email" type="email" value={email} onChange={this.onChange.bind(this)} placeholder="Email" required/>
-                <input name="password" type="password" value={password} onChange={this.onChange.bind(this)}
-                        placeholder="Password" required/>
-                <button>Login</button>
+                <div>
+                    <TextField
+                        name="email"
+                        floatingLabelText="YOUR EMAIL"
+                        floatingLabelStyle= {{ color : "white"}}
+                        type = "email"
+                        onChange={this.onChange.bind(this)}            
+                        value={this.props.registerStore.email}
+                    />
+                </div>
+                <div>
+                <TextField
+                    name="password"
+                    floatingLabelStyle= {{ color : "white"}}
+                    floatingLabelText="password"
+                    type = "password"
+                    onChange={this.onChange.bind(this)}            
+                    value={this.props.registerStore.password}
+                />
+                </div>
+                <button className=""><i>CONNEXION</i></button>
                 </form>
             </div>
         );
