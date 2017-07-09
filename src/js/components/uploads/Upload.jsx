@@ -111,7 +111,6 @@ class Upload extends Component {
             // const posts = res.data.data.children.map(obj => obj.data);
             // this.setState({ posts });
             // this.props.history.push("/uploads")
-            this.props.uploadFormStore.setErrors();
             this.state.fireRedirect = true;
             this.setState(this.state);
         }).catch((error, res)=> {
@@ -159,7 +158,7 @@ class Upload extends Component {
             <form id="audiofileform" name="audiofileform" onSubmit={this.handleSubmit.bind(this)}>
             {
                 this.state.fireRedirect ?
-                <Redirect to="/upload/me" push/> :
+                <Redirect to="/uploads/me" push/> :
                 ""
             }
                 <Row>

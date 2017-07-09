@@ -42,15 +42,17 @@ export default class Player extends Component {
       }.bind(this))
       player.addEventListener('canplay', function(e){
         $(player).off('timeupdate').on('timeupdate', function(e){
-        this.props.trackStore.activeTrack = true;
+          this.props.trackStore.activeTrack = true;
           var current = player.currentTime;
           this.state.currentTime = this.formatTime(current);
           this.setState(this.state);
-          var percent = (current / this.state.duration) * 100;
+          var percent = (player.currentTime / player.duration) * 100;
           progress.style.width = percent + '%';
         }.bind(this));
       }.bind(this));
       player.addEventListener('ended', function(){
+        this.props.trackStore.activeTrack = true;
+
       // playPause.attributes.d.value = "M18 12L0 24V0";
       // player.currentTime = 0;
       }.bind(this));

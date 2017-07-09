@@ -17,13 +17,14 @@ class UploadPreview extends Component {
         if (player) {
             player.src = `${FULL_API_URL}/audiofiles/${this.props.preview.id}/stream?token=${Auth.getAuthenticatedToken()}`
         }
-        if (player.paused) {
+        console.warn(this.props.trackStore.activeTrack)
+        if (!this.props.trackStore.activeTrack) {
             player.play();
         } else {
             player.pause();
         }
         this.props.trackStore.setTrack(this.props.preview.cover, this.props.preview.title, this.props.preview.artist)
-        this.state.play = player.paused;
+        this.state.play = !player.paused;
         this.setState(this.state)
     }
     render() {

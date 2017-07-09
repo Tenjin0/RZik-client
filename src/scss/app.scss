@@ -511,44 +511,41 @@ li.preview .cover:hover {
 
         }
     }
-
-        .feelthesound-container {
-            width : 99%;
-            position : absolute;
-            & > div {
-                position: absolute;
-                left: 0;
-            }
-            .white {
-                color: white;
-                z-index: 3;
-                right: 0;
-            }
-            .blue {
-                color: cyan;
-                z-index: 2;
-                right: -6px;
-            }
-            .red {
-                color: red;
-                right: -12px;
-                z-index: 1;
-            }
-            position: relative;
-            text-align: center;
-            margin: auto 0;
-            top: 40vh;
-            font-size: 40px;
-            .feelthesound {
-                margin-right: 15px;
-            }
-            .emotion {
-                font-weight: 100;
-            }
-        }
-        
-    }
-    .login-container {
-        & > div {
-        }
 }
+
+.feelthesound-container {
+    width : 99%;
+    position : absolute;
+    & > div {
+        position: absolute;
+        left: 0;
+    }
+    .white {
+        color: white;
+        z-index: 3;
+        right: 0;
+    }
+    .blue {
+        color: cyan;
+        z-index: 2;
+        right: -6px;
+    }
+    .red {
+        color: red;
+        right: -12px;
+        z-index: 1;
+    }
+    position: relative;
+    text-align: center;
+    margin: auto 0;
+    top: 40vh;
+    font-size: 40px;
+    .feelthesound {
+        margin-right: 15px;
+    }
+    .emotion {
+        font-weight: 100;
+    }
+}
+
+

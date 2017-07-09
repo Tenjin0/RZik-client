@@ -15,7 +15,6 @@ export default class Api {
         if(data) {
             opts.data = data;
         }
-        console.warn(opts)
         return axios(opts)
     }
 
